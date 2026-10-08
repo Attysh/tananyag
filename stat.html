@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="hu" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statisztika 1 | Teljes Tudástár</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    
+    <script>
+      MathJax = {
+        tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+        svg: { fontCache: 'global' }
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { 
+                        sans: ['Outfit', 'sans-serif'], 
+                        mono: ['Space Grotesk', 'monospace'] 
+                    },
+                    colors: { 
+                        primary: '#c084fc', 
+                        darkbg: '#0f172a' 
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #0f172a;
+            color: #e2e8f0;
+            -webkit-font-smoothing: antialiased;
+            font-size: 1.05rem;
+        }
+        .clean-section {
+            background: rgba(30, 41, 59, 0.55);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .topic-card {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.2s ease;
+        }
+        .topic-card:hover {
+            border-color: rgba(192, 132, 252, 0.4);
+            transform: translateY(-2px);
+        }
+        .formula-box {
+            background: rgba(0, 0, 0, 0.5);
+            border-left: 4px solid #c084fc;
+            padding: 1rem 1.25rem;
+            margin: 0.75rem 0;
+            border-radius: 0 0.75rem 0.75rem 0;
+            font-family: 'Space Grotesk', monospace;
+            font-size: 1.15rem;
+        }
+        .custom-nav-scroll {
+            scrollbar-width: thin;
+            scrollbar-color: #475569 rgba(15, 23, 42, 0.4);
+        }
+        .custom-nav-scroll::-webkit-scrollbar {
+            height: 7px;
+        }
+        .custom-nav-scroll::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 10px;
+        }
+        .custom-nav-scroll::-webkit-scrollbar-thumb {
+            background-color: #475569;
+            border-radius: 10px;
+        }
+        .custom-nav-scroll::-webkit-scrollbar-thumb:hover {
+            background-color: #c084fc;
+        }
+    </style>
+</head>
+<body class="selection:bg-purple-400 selection:text-slate-900 min-h-screen flex flex-col justify-between">
+
+    <!-- Fejléc -->
+    <header class="sticky top-0 w-full z-40 bg-slate-900/95 border-b border-slate-800 backdrop-blur-md">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 h-18 py-3 flex items-center justify-between gap-4">
+            <a href="index.html" class="flex items-center gap-3 text-slate-300 hover:text-white transition-colors group">
+                <div class="w-10 h-10 rounded-xl bg-slate-800 group-hover:bg-primary group-hover:text-slate-900 flex items-center justify-center transition-all">
+                    <i class="fa-solid fa-arrow-left text-sm"></i>
+                </div>
+                <span class="text-sm uppercase font-mono tracking-wider font-bold hidden sm:inline">Portál</span>
+            </a>
+
+            <!-- Keresőmező -->
+            <div class="relative flex-1 max-w-lg">
+                <i class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                <input type="text" id="searchInput" placeholder="Keresés tételek, próbák, képletek között..." 
+                       class="bg-slate-800/90 border border-slate-700 rounded-xl py-2.5 pl-11 pr-4 text-sm sm:text-base focus:outline-none focus:border-primary w-full text-white placeholder-slate-400 transition-all">
+            </div>
+
+            <span class="text-sm font-mono text-primary font-bold hidden md:block">Statisztika 1</span>
+        </div>
+    </header>
+
+    <!-- Fő tartalom -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 py-10 flex-1 w-full">
+        <div class="mb-10">
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Statisztika 1 Elméleti Összefoglaló</h1>
+            <p class="text-slate-300 text-base sm:text-lg mt-2">A teljes 189 diás egyetemi anyag a leíró statisztikától, a becslési eljárásokon át a hipotézisvizsgálatokig.</p>
+        </div>
+
+        <!-- Felső navigáció szép görgetősávval -->
+        <div class="flex items-center gap-3 overflow-x-auto pb-4 mb-10 text-sm font-mono custom-nav-scroll">
+            <a href="#stat1" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 whitespace-nowrap transition-all shadow-sm font-semibold">1. Alapfogalmak</a>
+            <a href="#stat2" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 whitespace-nowrap transition-all shadow-sm font-semibold">2. Kvantilisek & Átlag</a>
+            <a href="#stat3" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 whitespace-nowrap transition-all shadow-sm font-semibold">3. Szóródás & Alak</a>
+            <a href="#stat4" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 whitespace-nowrap transition-all shadow-sm font-semibold">4. Kapcsolatvizsgálat</a>
+            <a href="#stat5" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 whitespace-nowrap transition-all shadow-sm font-semibold">5. Indexszámítás & Területi index</a>
+            <a href="#stat6" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 whitespace-nowrap transition-all shadow-sm font-semibold">6. Becsléselmélet (ML & Momentumok)</a>
+            <a href="#stat7" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 whitespace-nowrap transition-all shadow-sm font-semibold">7. Konfidencia-intervallumok</a>
+            <a href="#stat8" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 whitespace-nowrap transition-all shadow-sm font-semibold">8. Hipotézisvizsgálat & Próbák</a>
+        </div>
+
+        <div id="content-area" class="space-y-12">
+            <!-- 1. FEJEZET -->
+            <section id="stat1" class="clean-section rounded-2xl p-6 sm:p-9">
+                <div class="border-b border-slate-700/80 pb-4 mb-6">
+                    <span class="text-sm font-mono text-primary uppercase tracking-wider font-bold">1. Fejezet</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">Statisztikai Alapfogalmak, Sokaságok és Ismérvek</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-purple-400 bg-purple-400/10 border-purple-400/20">Definíció</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Statisztikai sokaság (Populáció)</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-2">A vizsgálat tárgyát képező egységek összessége, halmaza. Típusai:</p>
+                        <ul class="text-slate-300 text-xs sm:text-sm space-y-1">
+                            <li>• <strong>Diszkrét / Folytonos:</strong> elkülöníthető egyedekből áll-e, vagy tetszőlegesen finomítható mérés (pl. gabonamennyiség).</li>
+                            <li>• <strong>Álló (Stock) / Mozgó (Flow):</strong> időpontra (pl. népesség jan. 1-én) vagy időtartamra vonatkozó (pl. éves forgalom).</li>
+                            <li>• <strong>Véges / Végtelen:</strong> véges sok elemből áll-e, vagy elméleti eloszlás.</li>
+                        </ul>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-sky-400 bg-sky-400/10 border-sky-400/20">Csoportosítás</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Ismérvek és Mérési Skálák</h3>
+                        </div>
+                        <ul class="text-slate-200 text-sm sm:text-base space-y-1">
+                            <li>• <strong>Nominális skála:</strong> csak azonosság, egyenlőség vizsgálható (pl. szak, nem). Nincs mértékegysége.</li>
+                            <li>• <strong>Ordinális skála:</strong> rendezhető, de a különbségek távolsága nem értelmezhető (pl. rangsor, végzettség).</li>
+                            <li>• <strong>Különbségi skála:</strong> a különbség értelmezhető, de a nulla pont önkényes (pl. Celsius fok).</li>
+                            <li>• <strong>Arányskála:</strong> abszolút nulla ponttal bír, az arányok is valósak (pl. jövedelem, kor, súly).</li>
+                        </ul>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl md:col-span-2">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-emerald-400 bg-emerald-400/10 border-emerald-400/20">Művelet</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Aggregátum & Viszonyszámok</h3>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm sm:text-base text-slate-200">
+                            <div>
+                                <p><strong>Aggregátum (\(A\)):</strong> Különféle termékek összértéke:</p>
+                                <div class="formula-box">\(A = \sum_{i=1}^n q_i p_i = \sum_{i=1}^n v_i\)</div>
+                            </div>
+                            <div>
+                                <p><strong>Viszonyszám (\(V = A / B\)):</strong> Két adat hányadosa.</p>
+                                <ul class="text-slate-300 text-xs sm:text-sm space-y-1 mt-1">
+                                    <li>• <em>Megoszlási:</em> rész és egész aránya.</li>
+                                    <li>• <em>Intenzitási:</em> két különböző fajta sokaság hányadosa (pl. egy főre jutó jövedelem).</li>
+                                    <li>• <em>Dinamikus:</em> időbeli változás (bázisviszonyszám: \(b_t = Y_t / Y_b\); láncviszonyszám: \(l_t = Y_t / Y_{t-1}\)).</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. FEJEZET -->
+            <section id="stat2" class="clean-section rounded-2xl p-6 sm:p-9">
+                <div class="border-b border-slate-700/80 pb-4 mb-6">
+                    <span class="text-xs font-mono text-primary uppercase tracking-wider font-bold">2. Fejezet</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">Egyváltozós Leíró Statisztika & Helyzetmutatók</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-sky-400 bg-sky-400/10 border-sky-400/20">Középérték</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Számtani átlag (\(\bar{Y}\))</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-1">A megfigyelt értékek összege osztva a darabszámmal. A négyzetes eltérések összege nála minimális:</p>
+                        <div class="formula-box">\(\bar{Y} = \frac{\sum Y_i}{N} = \frac{\sum f_i Y_i}{\sum f_i} = \sum g_i Y_i\)</div>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-sky-400 bg-sky-400/10 border-sky-400/20">Középérték</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Medián (\(Me\)) és Módusz (\(Mo\))</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-1"><strong>Medián:</strong> A rendezett sokaság pontos felező értéke. Nála az abszolút eltérések összege minimális.</p>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed"><strong>Módusz:</strong> A leggyakoribb érték (sűrűségfüggvény csúcsa).</p>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl md:col-span-2">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-purple-400 bg-purple-400/10 border-purple-400/20">Képlet</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Kvantilisek & Osztályközös Becslések</h3>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 text-sm sm:text-base text-slate-200">
+                            <div>
+                                <p class="font-bold text-primary mb-1">Osztályközös kvantilis-becslés:</p>
+                                <div class="formula-box">\(\tilde{Y}_p = Y_{q0} + \frac{pN - f_{q-1}'}{f_q} \cdot h_q\)</div>
+                                <p class="text-slate-400 text-xs">\(Y_{q0}\): alsó határ, \(h_q\): hosszúság, \(f_q\): osztály gyakorisága, \(f_{q-1}'\): előző kumulált gyakoriság.</p>
+                            </div>
+                            <div>
+                                <p class="font-bold text-primary mb-1">Osztályközös módusz-becslés:</p>
+                                <div class="formula-box">\(\tilde{M}o = Y_{mo,0} + \frac{d_a}{d_a + d_f} \cdot h_{mo}\)</div>
+                                <p class="text-slate-400 text-xs">\(d_a = f_{mo} - f_{mo-1}\) (előzőhöz képest), \(d_f = f_{mo} - f_{mo+1}\) (következőhöz képest).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. FEJEZET -->
+            <section id="stat3" class="clean-section rounded-2xl p-6 sm:p-9">
+                <div class="border-b border-slate-700/80 pb-4 mb-6">
+                    <span class="text-sm font-mono text-primary uppercase tracking-wider font-bold">3. Fejezet</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">Szóródás, Alakmutatók és Koncentráció</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-sky-400 bg-sky-400/10 border-sky-400/20">Szóródás</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Szórás (\(\sigma\)) és Relatív szórás (\(V\))</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-2">A négyzetes eltérések átlaga a variancia (\(\sigma^2\)), ennek gyöke a szórás:</p>
+                        <div class="formula-box">\(\sigma = \sqrt{\frac{\sum (Y_i - \bar{Y})^2}{N}} = \sqrt{\overline{Y^2} - \bar{Y}^2}\)</div>
+                        <div class="formula-box">\(V = \frac{\sigma}{\bar{Y}}\) (relatív szórás)</div>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-purple-400 bg-purple-400/10 border-purple-400/20">Mutatók</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Terjedelem & Interkvartilis távolság</h3>
+                        </div>
+                        <ul class="text-slate-200 text-sm sm:text-base space-y-2">
+                            <li>• <strong>Teljes terjedelem:</strong> \(R = Y_{max} - Y_{min}\).</li>
+                            <li>• <strong>Interkvartilis félterjedelem:</strong> \(R_{0.5} = Q_3 - Q_1\) (a középső 50% terjedelme, robusztus mutató).</li>
+                        </ul>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-emerald-400 bg-emerald-400/10 border-emerald-400/20">Alakzat</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Aszimmetria és Csúcsosság</h3>
+                        </div>
+                        <div class="text-slate-200 text-sm sm:text-base space-y-2">
+                            <p><strong>Ferdeség (\(\alpha_3\)):</strong> \(\alpha_3 = \frac{M_3(\bar{Y})}{\sigma^3}\) vagy Pearson: \(P = \frac{3(\bar{Y} - Me)}{\sigma}\). Pozitív: jobbra elnyúló, negatív: balra elnyúló.</p>
+                            <p><strong>Csúcsosság (\(\alpha_4\)):</strong> \(\alpha_4 = \frac{M_4(\bar{Y})}{\sigma^4} - 3\). Pozitív: normálisnál csúcsosabb, negatív: lapultabb.</p>
+                        </div>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-amber-400 bg-amber-400/10 border-amber-400/20">Koncentráció</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Lorenz-görbe & Herfindahl-index</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-2">Az értékösszeg összpontosulását méri. A Lorenz-görbe és az átló közti terület a koncentrációs együttható (\(L\)).</p>
+                        <div class="formula-box">\(HI = \sum_{i=1}^N Z_i^2\) (piaci koncentráció mutatója)</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. FEJEZET -->
+            <section id="stat4" class="clean-section rounded-2xl p-6 sm:p-9">
+                <div class="border-b border-slate-700/80 pb-4 mb-6">
+                    <span class="text-sm font-mono text-primary uppercase tracking-wider font-bold">4. Fejezet</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">Többváltozós Kapcsolatvizsgálat</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-amber-400 bg-amber-400/10 border-amber-400/20">Minőségi</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Asszociáció (Két minőségi ismérv)</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-2">Függetlenség vizsgálata a várt gyakoriságok (\(f_{ij}^* = \frac{f_{i\cdot} f_{\cdot j}}{N}\)) alapján:</p>
+                        <div class="formula-box">\(\chi^2 = \sum \sum \frac{(f_{ij} - f_{ij}^*)^2}{f_{ij}^*} \implies C = \sqrt{\frac{\chi^2}{N \cdot \min(r-1, c-1)}}\)</div>
+                        <p class="text-slate-400 text-xs sm:text-sm">\(C\) a Cramér-együttható (\(0 \le C \le 1\)).</p>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-emerald-400 bg-emerald-400/10 border-emerald-400/20">Vegyes</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Vegyes kapcsolat & Szóráselemzés</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-2">Egy mennyiségi és egy minőségi ismérv kapcsolata. Négyzetösszeg-felbontás:</p>
+                        <div class="formula-box">\(SST = SSB + SSK \implies \sigma^2 = \sigma_B^2 + \sigma_K^2\)</div>
+                        <div class="formula-box">\(H^2 = \frac{SSK}{SST} = \frac{\sigma_K^2}{\sigma^2}\) (Varianciahányados)</div>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-sky-400 bg-sky-400/10 border-sky-400/20">Mennyiségi</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Korreláció & Kovariancia</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-2">Két mennyiségi ismérv közötti lineáris kapcsolat:</p>
+                        <div class="formula-box">\(r(X,Y) = \frac{C(X,Y)}{\sigma_X \sigma_Y} \quad (-1 \le r \le 1)\)</div>
+                        <p class="text-slate-300 text-xs sm:text-sm">\(r^2\): determinációs együttható (magyarázott variancia aránya).</p>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-purple-400 bg-purple-400/10 border-purple-400/20">Sorrendi</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Spearman-féle Rangkorreláció (\(\rho\))</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-2">Ordinális skálán mért ismérvek közötti kapcsolat:</p>
+                        <div class="formula-box">\(\rho = 1 - \frac{6 \sum (R_X - R_Y)^2}{N(N^2 - 1)} \quad (-1 \le \rho \le 1)\)</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. FEJEZET -->
+            <section id="stat5" class="clean-section rounded-2xl p-6 sm:p-9">
+                <div class="border-b border-slate-700/80 pb-4 mb-6">
+                    <span class="text-sm font-mono text-primary uppercase tracking-wider font-bold">5. Fejezet</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">Standardizálás, Indexszámítás és Területi Indexek</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-sky-400 bg-sky-400/10 border-sky-400/20">Különbség</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Különbségfelbontás</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-2">Összetett viszonyszámok különbsége (\(K = \bar{V}_1 - \bar{V}_0\)):</p>
+                        <div class="formula-box">\(K = K' + K''\)</div>
+                        <p class="text-slate-300 text-xs sm:text-sm">\(K'\): részhatás-különbség, \(K''\): összetételhatás-különbség.</p>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-sky-400 bg-sky-400/10 border-sky-400/20">Hányados</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Indexfelbontás</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-2">Összetett viszonyszámok hányadosa (\(I = \bar{V}_1 / \bar{V}_0\)):</p>
+                        <div class="formula-box">\(I = I' \cdot I''\)</div>
+                        <p class="text-slate-300 text-xs sm:text-sm">\(I'\): részhatás-index, \(I''\): összetételhatás-index.</p>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-emerald-400 bg-emerald-400/10 border-emerald-400/20">Képletek</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Volumen-, Ár- és Értékindexek</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-2">Alapösszefüggés: \(I_v = I_q \cdot I_p\), ahol \(I_v = \frac{\sum q_1 p_1}{\sum q_0 p_0}\).</p>
+                        <div class="space-y-2 text-xs sm:text-sm text-slate-200">
+                            <div class="formula-box"><strong>Laspeyres (Bázis súlyú):</strong> \(I_q^0 = \frac{\sum q_1 p_0}{\sum q_0 p_0}, \quad I_p^0 = \frac{\sum q_0 p_1}{\sum q_0 p_0}\)</div>
+                            <div class="formula-box"><strong>Paasche (Tárgy súlyú):</strong> \(I_q^1 = \frac{\sum q_1 p_1}{\sum q_0 p_1}, \quad I_p^1 = \frac{\sum q_1 p_1}{\sum q_1 p_0}\)</div>
+                            <div class="formula-box"><strong>Fisher (Mértani átlag):</strong> \(I_q^F = \sqrt{I_q^0 \cdot I_q^1}, \quad I_p^F = \sqrt{I_p^0 \cdot I_p^1}\)</div>
+                        </div>
+                        <p class="text-slate-400 text-xs mt-2"><strong>Bortkiewicz-formula:</strong> \(\frac{I_q^1}{I_q^0} = 1 + V_{iq} V_{ip} r_{iq,ip}\). Cserearányindex (terms of trade): \(I_{cs} = I_p^x / I_p^m\).</p>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-purple-400 bg-purple-400/10 border-purple-400/20">Nemzetközi</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Vásárlóerő-paritás (PPP) & Árszínvonalindex</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-2">Területi indexeknél az időszakok szerepét országok veszik át. A vásárlóerő-paritás egy nemzetközi árindex, ami megadja, hogy egy valutaegység mennyi helyi valutával egyenértékű a vizsgált termékekre.</p>
+                        <div class="formula-box text-xs sm:text-sm">\(PLI(A/B) = \frac{PPP(A/B)}{ER(A/B)}\) (Árszínvonalindex / Price Level Index)</div>
+                        <p class="text-slate-400 text-xs mt-1">\(ER\): valutaárfolyam. Tipikus példa: a Big Mac index.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. FEJEZET -->
+            <section id="stat6" class="clean-section rounded-2xl p-6 sm:p-9">
+                <div class="border-b border-slate-700/80 pb-4 mb-6">
+                    <span class="text-sm font-mono text-primary uppercase tracking-wider font-bold">6. Fejezet</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">Mintavétel, Becsléselmélet és Határeloszlások</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-purple-400 bg-purple-400/10 border-purple-400/20">Minták</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Mintavételi Eljárások</h3>
+                        </div>
+                        <ul class="text-slate-200 text-sm sm:text-base space-y-2">
+                            <li>• <strong>FAE (Visszatevéses):</strong> független mintaelemek. Mintaátlag szórása: \(\sigma_{\bar{y}} = \sigma / \sqrt{n}\).</li>
+                            <li>• <strong>EV (Visszatevés nélküli):</strong> véges sokaság korrekciója lép fel: \(\sigma_{\bar{y}} = \frac{\sigma}{\sqrt{n}}\sqrt{1 - \frac{n}{N}}\).</li>
+                            <li>• <strong>Rétegzett minta:</strong> a sokaságot homogén csoportokra bontjuk (arányos, egyenletes, vagy Neyman-féle optimális allokáció).</li>
+                        </ul>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-emerald-400 bg-emerald-400/10 border-emerald-400/20">Tulajdonság</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Becslőfüggvények Kritériumai</h3>
+                        </div>
+                        <ul class="text-slate-200 text-sm sm:text-base space-y-1.5">
+                            <li>• <strong>Torzítatlanság:</strong> \(E(\hat{\theta}) = \theta\). A korrigált empirikus szórásnégyzet (\(s^2 = \frac{1}{n-1}\sum(y_i - \bar{y})^2\)) torzítatlan.</li>
+                            <li>• <strong>Hatásosság:</strong> a legkisebb varianciájú torzítatlan becslés (MVUE).</li>
+                            <li>• <strong>Konzisztencia:</strong> ha \(n \to \infty\), a becslés sztochasztikusan tart a valódi paraméterhez.</li>
+                            <li>• <strong>MSE kritérium:</strong> \(MSE(\hat{\theta}) = Var(\hat{\theta}) + B^2(\hat{\theta})\) (átlagos négyzetes hiba).</li>
+                        </ul>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-sky-400 bg-sky-400/10 border-sky-400/20">Módszerek</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Momentumok & Maximum Likelihood Módszere</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-2"><strong>Momentumok módszere:</strong> az elméleti momentumokat (\(E(Y^k)\)) egyenlővé tesszük a minta empirikus momentumaival (\(\frac{1}{n}\sum y_i^k\)).</p>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed"><strong>Maximum Likelihood (ML):</strong> a minta együttes sűrűségfüggvényének (\(L(\theta)\)) vagy a log-likelihood függvénynek (\(\ell(\theta) = \ln L(\theta)\)) maximumhelyét keressük: \(\frac{\partial \ell}{\partial \theta} = 0\).</p>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-amber-400 bg-amber-400/10 border-amber-400/20">Tételek</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">CLT és Normálisból Származtatott Eloszlások</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-2"><strong>Centrális Határeloszlástétel (CLT):</strong> Nagy \(n\) esetén a független változók átlaga aszimptotikusan normális: \(\bar{Y} \sim N(\mu, \sigma^2/n)\).</p>
+                        <ul class="text-slate-300 text-xs sm:text-sm space-y-1">
+                            <li>• \(\chi^2\)-eloszlás: független standard normálisok négyzetösszege.</li>
+                            <li>• \(t\)-eloszlás (Student): standard normális és gyök alatti független \(\chi^2\) hányadosa.</li>
+                            <li>• \(F\)-eloszlás: két független \(\chi^2\) változó hányadosa a szabadsági fokaival súlyozva.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 7. FEJEZET -->
+            <section id="stat7" class="clean-section rounded-2xl p-6 sm:p-9">
+                <div class="border-b border-slate-700/80 pb-4 mb-6">
+                    <span class="text-sm font-mono text-primary uppercase tracking-wider font-bold">7. Fejezet</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">Intervallumbecslések (Kétoldali és Egyoldali)</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-sky-400 bg-sky-400/10 border-sky-400/20">Várható érték</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Várható érték becslése (\(\mu\))</h3>
+                        </div>
+                        <div class="space-y-3 text-sm sm:text-base text-slate-200">
+                            <div>
+                                <p class="font-bold text-primary">1. Ismert szórás (\(\sigma\)) esetén (z-skála):</p>
+                                <div class="formula-box">\(\bar{y} \pm z_{1-\alpha/2} \cdot \frac{\sigma}{\sqrt{n}}\)</div>
+                            </div>
+                            <div>
+                                <p class="font-bold text-primary">2. Ismeretlen szórás (\(s\)) esetén (Student t-skála):</p>
+                                <div class="formula-box">\(\bar{y} \pm t_{1-\alpha/2}(n-1) \cdot \frac{s}{\sqrt{n}}\)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-purple-400 bg-purple-400/10 border-purple-400/20">Arány</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Sokasági arány becslése (\(P\))</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-1">Mintaarány: \(p = k/n\). Feltétel: \(\min(np, n(1-p)) \ge 10\).</p>
+                        <div class="formula-box">\(p \pm z_{1-\alpha/2} \cdot \sqrt{\frac{p(1-p)}{n}}\)</div>
+                        <p class="text-slate-300 text-xs sm:text-sm">Szükséges mintanagyság: \(n \le \frac{z_{1-\alpha/2}^2}{4\Delta^2}\).</p>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-amber-400 bg-amber-400/10 border-amber-400/20">Variancia</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Variancia & Egyoldali Becslések</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-1">Normális sokaság esetén \(\chi^2\)-eloszlással:</p>
+                        <div class="formula-box">\(\left( \frac{(n-1)s^2}{\chi^2_{1-\alpha/2}(n-1)} \; ; \; \frac{(n-1)s^2}{\chi^2_{\alpha/2}(n-1)} \right)\)</div>
+                        <p class="text-slate-300 text-xs sm:text-sm mt-2"><strong>Egyoldali intervallumok:</strong> Baloldali: \((-\infty, \bar{y} + z_{1-\alpha}\frac{\sigma}{\sqrt{n}})\), Jobboldali: \((\bar{y} - z_{1-\alpha}\frac{\sigma}{\sqrt{n}}, \infty)\).</p>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-emerald-400 bg-emerald-400/10 border-emerald-400/20">Kétminta</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Két átlag különbsége & Páros Minta</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-1">Független minták esetén (\(\sigma_X = \sigma_Y\)):</p>
+                        <div class="formula-box">\((\bar{y} - \bar{x}) \pm t_{1-\alpha/2}(\nu) \cdot s_c \sqrt{\frac{1}{n_Y} + \frac{1}{n_X}}\)</div>
+                        <p class="text-slate-300 text-xs sm:text-sm mt-2"><strong>Páros minta (\(d_i = y_i - x_i\)):</strong> az egymáshoz tartozó mérések különbségeit tekintjük önálló mintának: \(\bar{d} \pm t_{1-\alpha/2}(n-1)\frac{s_d}{\sqrt{n}}\).</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 8. FEJEZET -->
+            <section id="stat8" class="clean-section rounded-2xl p-6 sm:p-9">
+                <div class="border-b border-slate-700/80 pb-4 mb-6">
+                    <span class="text-sm font-mono text-primary uppercase tracking-wider font-bold">8. Fejezet</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">Hipotézisvizsgálatok & Statisztikai Próbák</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-amber-400 bg-amber-400/10 border-amber-400/20">Alapfogalom</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Hipotézisek & Döntési Hibák</h3>
+                        </div>
+                        <ul class="text-slate-200 text-sm sm:text-base space-y-1 mb-2">
+                            <li>• <strong>\(H_0\) (Nullhipotézis):</strong> Alapfeltevés (pl. \(\mu = \mu_0\)).</li>
+                            <li>• <strong>\(H_1\) (Alternatív):</strong> Ellenhipotézis (\(\neq\), \(<\), vagy \(>\)).</li>
+                        </ul>
+                        <div class="bg-slate-900/90 p-3 rounded-lg text-xs sm:text-sm space-y-1">
+                            <p>• <strong>Elsőfajú hiba (\(\alpha\)):</strong> elvetjük az igaz \(H_0\)-t (szignifikanciaszint).</p>
+                            <p>• <strong>Másodfajú hiba (\(\beta\)):</strong> elfogadjuk a hamis \(H_0\)-t.</p>
+                        </div>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-emerald-400 bg-emerald-400/10 border-emerald-400/20">Döntés</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Kritikus tartomány & p-érték</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-2">Ha a számított statisztika a kritikus tartományba esik, \(H_0\)-t elvetjük.</p>
+                        <div class="formula-box">Ha \(p \le \alpha \implies H_0\)-t elvetjük! &emsp;|&emsp; Ha \(p > \alpha \implies H_0\)-t elfogadjuk.</div>
+                        <p class="text-slate-400 text-xs mt-1">Összetett nullhipotéziseknél (\(H_0: \mu \ge \mu_0\)) technikai nullhipotézist (\(H_0^T: \mu = \mu_0\)) tesztelünk.</p>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl md:col-span-2">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-sky-400 bg-sky-400/10 border-sky-400/20">Próbák</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">A Legfontosabb Próbastatisztikák Összefoglalása</h3>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm sm:text-base text-slate-200">
+                            <div class="formula-box">
+                                <p class="text-primary font-bold">z-próba (\(\sigma\) ismert):</p>
+                                <p>\(z = \frac{\bar{y} - \mu_0}{\sigma / \sqrt{n}} \sim N(0,1)\)</p>
+                                <p class="text-slate-400 text-xs mt-1">Kétoldali 5%-os küszöb: \(\pm 1.96\).</p>
+                            </div>
+                            <div class="formula-box">
+                                <p class="text-primary font-bold">t-próba (\(\sigma\) ismeretlen):</p>
+                                <p>\(t = \frac{\bar{y} - \mu_0}{s / \sqrt{n}} \sim t(n-1)\)</p>
+                                <p class="text-slate-400 text-xs mt-1">Kis mintákra és normális sokaságra.</p>
+                            </div>
+                            <div class="formula-box">
+                                <p class="text-primary font-bold">Aránypróba (\(P = P_0\)):</p>
+                                <p>\(z = \frac{p - P_0}{\sqrt{\frac{P_0(1-P_0)}{n}}} \sim N(0,1)\)</p>
+                                <p class="text-slate-400 text-xs mt-1">Sokasági arány tesztelése.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="border-t border-slate-800/80 py-6 text-center text-sm text-slate-500">
+        Statisztika 1 · Egyetemi Segédanyagok
+    </footer>
+
+    <script>
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase().trim();
+            const cards = document.querySelectorAll('.topic-card');
+            cards.forEach(card => {
+                const text = card.innerText.toLowerCase();
+                card.style.display = text.includes(query) ? 'block' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>

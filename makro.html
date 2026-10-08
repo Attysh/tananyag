@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="hu" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Makroökonómia | Teljes Tudástár</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    
+    <script>
+      MathJax = {
+        tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+        svg: { fontCache: 'global' }
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { 
+                        sans: ['Outfit', 'sans-serif'], 
+                        mono: ['Space Grotesk', 'monospace'] 
+                    },
+                    colors: { 
+                        primary: '#fbbf24', 
+                        darkbg: '#0f172a' 
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #0f172a;
+            color: #e2e8f0;
+            -webkit-font-smoothing: antialiased;
+            font-size: 1.05rem;
+        }
+        .clean-section {
+            background: rgba(30, 41, 59, 0.55);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .topic-card {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.2s ease;
+        }
+        .topic-card:hover {
+            border-color: rgba(251, 191, 36, 0.4);
+            transform: translateY(-2px);
+        }
+        .formula-box {
+            background: rgba(0, 0, 0, 0.5);
+            border-left: 4px solid #fbbf24;
+            padding: 1rem 1.25rem;
+            margin: 0.75rem 0;
+            border-radius: 0 0.75rem 0.75rem 0;
+            font-family: 'Space Grotesk', monospace;
+            font-size: 1.15rem;
+        }
+        .custom-nav-scroll {
+            scrollbar-width: thin;
+            scrollbar-color: #475569 rgba(15, 23, 42, 0.4);
+        }
+        .custom-nav-scroll::-webkit-scrollbar {
+            height: 7px;
+        }
+        .custom-nav-scroll::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 10px;
+        }
+        .custom-nav-scroll::-webkit-scrollbar-thumb {
+            background-color: #475569;
+            border-radius: 10px;
+        }
+        .custom-nav-scroll::-webkit-scrollbar-thumb:hover {
+            background-color: #fbbf24;
+        }
+    </style>
+</head>
+<body class="selection:bg-amber-400 selection:text-slate-900 min-h-screen flex flex-col justify-between">
+
+    <header class="sticky top-0 w-full z-40 bg-slate-900/95 border-b border-slate-800 backdrop-blur-md">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 h-18 py-3 flex items-center justify-between gap-4">
+            <a href="index.html" class="flex items-center gap-3 text-slate-300 hover:text-white transition-colors group">
+                <div class="w-10 h-10 rounded-xl bg-slate-800 group-hover:bg-primary group-hover:text-slate-900 flex items-center justify-center transition-all">
+                    <i class="fa-solid fa-arrow-left text-sm"></i>
+                </div>
+                <span class="text-sm uppercase font-mono tracking-wider font-bold hidden sm:inline">Portál</span>
+            </a>
+
+            <div class="relative flex-1 max-w-lg">
+                <i class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                <input type="text" id="searchInput" placeholder="Keresés tételek, modellek, képletek között..." 
+                       class="bg-slate-800/90 border border-slate-700 rounded-xl py-2.5 pl-11 pr-4 text-sm sm:text-base focus:outline-none focus:border-amber-400 w-full text-white placeholder-slate-400 transition-all">
+            </div>
+
+            <span class="text-sm font-mono text-primary font-bold hidden md:block">Makroökonómia</span>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 py-10 flex-1 w-full">
+        <div class="mb-10">
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Makroökonómia Elmélet</h1>
+            <p class="text-slate-300 text-base sm:text-lg mt-2">Átfogó és jól tanulható tananyag a GDP-től a neoklasszikus elosztáson át a pénzpiacig.</p>
+        </div>
+
+        <div class="flex items-center gap-3 overflow-x-auto pb-4 mb-10 text-sm font-mono custom-nav-scroll">
+            <a href="#macro1" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 whitespace-nowrap transition-all shadow-sm font-semibold">1. Aggregátumok & GDP</a>
+            <a href="#macro2" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 whitespace-nowrap transition-all shadow-sm font-semibold">2. Infláció & Árindexek</a>
+            <a href="#macro3" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 whitespace-nowrap transition-all shadow-sm font-semibold">3. Termelés & Tényezőárak</a>
+            <a href="#macro4" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 whitespace-nowrap transition-all shadow-sm font-semibold">4. Megtakarítás & Beruházás</a>
+            <a href="#macro5" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 whitespace-nowrap transition-all shadow-sm font-semibold">5. Pénzrendszer & Jegybank</a>
+        </div>
+
+        <div id="content-area" class="space-y-12">
+            <!-- 1. FEJEZET -->
+            <section id="macro1" class="clean-section rounded-2xl p-6 sm:p-9">
+                <div class="border-b border-slate-700/80 pb-4 mb-6">
+                    <span class="text-sm font-mono text-primary uppercase tracking-wider font-bold">1. Előadás</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">Makrogazdasági Aggregátumok & GDP</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-amber-400 bg-amber-400/10 border-amber-400/20">Definíció</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Bruttó Hazai Termék (GDP)</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed">Egy adott ország határain belül adott időszak alatt megtermelt és végső felhasználásra kerülő javak és szolgáltatások piaci értéke. Csak a végső javakat méri a halmozódás kiszűrésére.</p>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-purple-400 bg-purple-400/10 border-purple-400/20">Megközelítés</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">A GDP három számítási oldala</h3>
+                        </div>
+                        <ul class="text-slate-200 text-sm sm:text-base space-y-1.5">
+                            <li>• <strong>Termelési oldal:</strong> Bruttó hozzáadott értékek összege + termékadók/támogatások egyenlege.</li>
+                            <li>• <strong>Kiadási oldal:</strong> Végső felhasználási kiadások: \(Y = C + I + G + NX\).</li>
+                            <li>• <strong>Jövedelmi oldal:</strong> Munkajövedelmek + működési eredmény (profit) + vegyes jövedelem + adók.</li>
+                        </ul>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-sky-400 bg-sky-400/10 border-sky-400/20">Képlet</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">GNI és NNI mutatók</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-2">Nemzetközi jövedelmi átutalásokkal korrigált aggregátumok:</p>
+                        <div class="formula-box">\(GNI = GDP + BRee\)</div>
+                        <p class="text-slate-300 text-xs sm:text-sm mt-1">\(BRee\): külföldről kapott és külföldre fizetett elsődleges tényezőjövedelmek egyenlege. \(NNI = GNI - \text{Amortizáció}\).</p>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-emerald-400 bg-emerald-400/10 border-emerald-400/20">Fogalom</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Hozzáadott érték (Value Added)</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-2">Az árbevétel és a vásárolt termelői felhasználás (alapanyag, energia, alkatrész) különbsége:</p>
+                        <div class="formula-box">Hozzáadott érték = Kibocsátás - Termelői felhasználás</div>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl md:col-span-2">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-emerald-400 bg-emerald-400/10 border-emerald-400/20">Összefüggés</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Nominális vs. Reál GDP és a Láncsúlyozás</h3>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm sm:text-base text-slate-200">
+                            <div>
+                                <p><strong>Nominális GDP:</strong> Folyó áras kibocsátás (\(NGDP_t = \sum P_t Q_t\)). Áremelkedés hatására is nő.</p>
+                                <p class="mt-2"><strong>Reál GDP:</strong> Változatlan bázisáron számolt volumen (\(RGDP_t = \sum P_{bázis} Q_t\)). Ez jelzi a tényleges fizikai növekedést.</p>
+                            </div>
+                            <div>
+                                <p><strong>Láncindex-súlyozás:</strong> Az árarányok elavulását kiküszöbölve az egymást követő évek növekedéseit összeláncolva számolnak:</p>
+                                <div class="formula-box">\(\frac{RGDP_t}{RGDP_0} = \frac{RGDP_1}{RGDP_0} \times \frac{RGDP_2}{RGDP_1} \times \dots \times \frac{RGDP_t}{RGDP_{t-1}}\)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. FEJEZET -->
+            <section id="macro2" class="clean-section rounded-2xl p-6 sm:p-9">
+                <div class="border-b border-slate-700/80 pb-4 mb-6">
+                    <span class="text-sm font-mono text-primary uppercase tracking-wider font-bold">2. Előadás</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">Infláció és Árindexek</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-sky-400 bg-sky-400/10 border-sky-400/20">Képlet</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Fogyasztóiár-index (CPI)</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-2">Bázisévi rögzített fogyasztói kosár értékváltozását követi (Laspeyres-jellegű):</p>
+                        <div class="formula-box">\(CPI_t = \frac{\sum P_t \cdot Q_{bázis}}{\sum P_{bázis} \cdot Q_{bázis}} \times 100\)</div>
+                        <p class="text-slate-300 text-xs sm:text-sm">Tartalmazza az importált fogyasztási javakat is.</p>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-sky-400 bg-sky-400/10 border-sky-400/20">Képlet</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">GDP-deflátor (GDPD)</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-2">Folyó évi termelési kosáron alapul (Paasche-jellegű):</p>
+                        <div class="formula-box">\(GDPD_t = \frac{NGDP_t}{RGDP_t} \times 100\)</div>
+                        <p class="text-slate-300 text-xs sm:text-sm">Csak a belföldi termelést vizsgálja, az importot nem.</p>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-emerald-400 bg-emerald-400/10 border-emerald-400/20">Tétel</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Helyettesítési torzítás</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed">Ha egy termék megdrágul, a vásárlók olcsóbb jószágra váltanak. Mivel a CPI kosara rögzített, ezt a váltást nem tudja lekövetni, ezért <strong>szisztematikusan felülbecsli</strong> a megélhetési költségek valós emelkedését.</p>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-purple-400 bg-purple-400/10 border-purple-400/20">Csoportosítás</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Keresleti és Kínálati infláció</h3>
+                        </div>
+                        <div class="text-slate-200 text-sm sm:text-base space-y-1.5">
+                            <p>• <strong>Kereslet húzta:</strong> Túl nagy összkereslet, amit a kínálat nem tud követni; a kibocsátás és az árak is emelkednek.</p>
+                            <p>• <strong>Költség nyomta:</strong> Termelési költségsokkok miatti kínálatcsökkenés (pl. olajársokk, bérnyomás); recesszióval és növekvő árakkal járhat.</p>
+                        </div>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl md:col-span-2">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-amber-400 bg-amber-400/10 border-amber-400/20">Költségek</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Az infláció társadalmi költségei</h3>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm sm:text-base text-slate-200">
+                            <div>
+                                <p class="font-bold text-amber-300">Várt infláció terhei:</p>
+                                <ul class="text-slate-300 space-y-1 mt-1">
+                                    <li>• <em>Cipőtalp-költség:</em> kevesebb készpénzt tartunk, gyakoribb a pénzfelvétel.</li>
+                                    <li>• <em>Étlap-költség:</em> az árcédulák, katalógusok folyamatos módosításának költsége.</li>
+                                    <li>• <em>Relatív árak torzulása:</em> nem minden ár változik egyszerre.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <p class="font-bold text-amber-300">Váratlan infláció hatása:</p>
+                                <p class="text-slate-300 mt-1">Nem szándékolt vagyon-újraelosztást okoz a gazdaságban: a hitelfelvevők jól járnak, mert a kölcsön reálértéke csökken, a hitelezők és megtakarítók pedig veszítenek.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. FEJEZET -->
+            <section id="macro3" class="clean-section rounded-2xl p-6 sm:p-9">
+                <div class="border-b border-slate-700/80 pb-4 mb-6">
+                    <span class="text-sm font-mono text-primary uppercase tracking-wider font-bold">3. Előadás</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">Termelés & Tényezőpiaci Egyensúly</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-purple-400 bg-purple-400/10 border-purple-400/20">Feltételek</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Klasszikus hosszú távú feltevések</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed">Nincsenek kihasználatlan kapacitások (\(\bar{K}, \bar{L}\) rögzített). Az árak és bérek teljesen rugalmasak. A kibocsátást kizárólag a kínálati oldal és a termelési függvény határozza meg: \(\bar{Y} = F(\bar{K}, \bar{L})\).</p>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-sky-400 bg-sky-400/10 border-sky-400/20">Képlet</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Határtermékek és Reál tényezőárak</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-1">A profitmaximalizáló vállalat feltétele:</p>
+                        <div class="formula-box">\(MPL = \frac{W}{P}\) (munka határterméke = reálbér)</div>
+                        <div class="formula-box">\(MPK = \frac{R}{P}\) (tőke határterméke = reál bérleti díj)</div>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-emerald-400 bg-emerald-400/10 border-emerald-400/20">Tétel</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Euler-tétel (Kimerítési tétel)</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-2">Állandó skálahozadék és tökéletes verseny esetén a gazdasági profit nulla. Ha minden tényezőt a határtermékén fizetnek meg, a tényezőjövedelmek összege kimeríti a kibocsátást:</p>
+                        <div class="formula-box">\(Y = MPL \cdot L + MPK \cdot K\)</div>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-sky-400 bg-sky-400/10 border-sky-400/20">Képlet</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Cobb–Douglas termelési függvény</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-1">\(Y = A K^\alpha L^{1-\alpha}\). Tulajdonságai:</p>
+                        <ul class="text-slate-300 text-xs sm:text-sm space-y-1">
+                            <li>• Munkajövedelem aránya a GDP-ben: \(\frac{w \cdot L}{Y} = 1-\alpha\).</li>
+                            <li>• Tőkejövedelem aránya a GDP-ben: \(\frac{r_c \cdot K}{Y} = \alpha\).</li>
+                            <li>• Munkatermelékenység: \(y = \frac{Y}{L} = A k^\alpha\), ahol \(k = K/L\) az egy főre eső tőkeállomány.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. FEJEZET -->
+            <section id="macro4" class="clean-section rounded-2xl p-6 sm:p-9">
+                <div class="border-b border-slate-700/80 pb-4 mb-6">
+                    <span class="text-sm font-mono text-primary uppercase tracking-wider font-bold">4. Előadás</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">Megtakarítás és Beruházás (Zárt gazdaság)</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-sky-400 bg-sky-400/10 border-sky-400/20">Képlet</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Megtakarítási komponensek</h3>
+                        </div>
+                        <ul class="text-slate-200 text-sm sm:text-base space-y-2">
+                            <li>• <strong>Magánmegtakarítás:</strong> \(S_P = (Y - T) - C\).</li>
+                            <li>• <strong>Kormányzati megtakarítás:</strong> \(S_G = T - G\) (költségvetési egyenleg).</li>
+                            <li>• <strong>Nemzeti megtakarítás:</strong> \(S = S_P + S_G = Y - C - G\).</li>
+                        </ul>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-purple-400 bg-purple-400/10 border-purple-400/20">Függvények</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Fogyasztás és Beruházási Kereslet</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-2">Fogyasztás: \(C = \bar{C} + C(Y-T, r)\). A rendelkezésre álló jövedelemtől pozitívan, a reálkamatlábtól negatívan függ.</p>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed">Beruházás: \(I = \bar{I} + I(r)\), ahol \(\frac{dI(r)}{dr} < 0\) (a magasabb reálkamatláb csökkenti a beruházási kedvet).</p>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-amber-400 bg-amber-400/10 border-amber-400/20">Egyensúly</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Kölcsönforrások piaca</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-2">A piacon a kínálat a nemzeti megtakarítás (\(S\)), a kereslet a beruházás (\(I\)). Egyensúlyban:</p>
+                        <div class="formula-box">\(S(r) = I(r) \implies \bar{Y} - C(\bar{Y}-\bar{T}, r) - \bar{G} = I(r)\)</div>
+                        <p class="text-slate-300 text-xs sm:text-sm">A reálkamatláb (\(r\)) tartja egyensúlyban a piacot.</p>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-emerald-400 bg-emerald-400/10 border-emerald-400/20">Tétel</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Kiszorítási hatás (Crowding-out)</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-2">Ha a kormány növeli a kiadásait (\(G \uparrow\)) változatlan adók mellett:</p>
+                        <div class="formula-box">\(G \uparrow \implies S_G \downarrow \implies S \downarrow \implies r \uparrow \implies I \downarrow\)</div>
+                        <p class="text-slate-300 text-xs sm:text-sm mt-1">A megnövekedett állami kiadások felhajtják a reálkamatlábat, ami közvetlenül kiszorítja a magánberuházásokat.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. FEJEZET -->
+            <section id="macro5" class="clean-section rounded-2xl p-6 sm:p-9">
+                <div class="border-b border-slate-700/80 pb-4 mb-6">
+                    <span class="text-sm font-mono text-primary uppercase tracking-wider font-bold">5. Előadás</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">Pénz, Pénzteremtés & Monetáris Politika</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-amber-400 bg-amber-400/10 border-amber-400/20">Definíció</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Pénz funkciói & Aggregátumok</h3>
+                        </div>
+                        <ul class="text-slate-200 text-sm sm:text-base space-y-1 mb-2">
+                            <li>• <strong>Csereeszköz:</strong> tranzakciók lebonyolítása.</li>
+                            <li>• <strong>Értékmérő:</strong> elszámolási egység.</li>
+                            <li>• <strong>Vagyontartási eszköz:</strong> likvid értékőrző.</li>
+                        </ul>
+                        <div class="formula-box text-xs sm:text-sm">
+                            \(MB = C + R\) (Monetáris bázis: készpénz + banki tartalékok)<br>
+                            \(M1 = C + D\) (Készpénz + folyószámlabetétek)<br>
+                            \(M2 = M1 + \text{határidős betétek (max 2 év)}\)
+                        </div>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-sky-400 bg-sky-400/10 border-sky-400/20">Képlet</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Pénzmultiplikátor Modell</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-2">Megmutatja, hogy a monetáris bázis egységnyi növekedése mekkora pénzkínálat-bővülést okoz:</p>
+                        <div class="formula-box">\(M = m \cdot MB, \quad m = \frac{c + 1}{c + rr + e}\)</div>
+                        <p class="text-slate-300 text-xs sm:text-sm mt-1">\(c = C/D\) (készpénztartás aránya), \(rr = RR/D\) (kötelező tartalékráta), \(e = ER/D\) (fölös tartalékráta). A pénzkínálat nő, ha \(MB \uparrow\), vagy ha \(c, rr, e \downarrow\).</p>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-emerald-400 bg-emerald-400/10 border-emerald-400/20">Tétel</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Mennyiségi Pénzelmélet & Semlegesség</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-2">Csereegyenlet azonosság: \(M \cdot V = P \cdot Y\). Hosszú távon a sebesség (\(V\)) és a kibocsátás (\(Y\)) rögzített:</p>
+                        <div class="formula-box">\(\Delta M\% + \Delta V\% = \pi + \Delta Y\% \implies \pi = \Delta M\% - \Delta Y\%\)</div>
+                        <p class="text-slate-300 text-xs sm:text-sm mt-1">A pénz semleges: a pénzmennyiség változása kizárólag az árszínvonalat növeli, a reálváltozókra nincs hatással.</p>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-sky-400 bg-sky-400/10 border-sky-400/20">Képlet</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Fisher-egyenlet & Seigniorage</h3>
+                        </div>
+                        <div class="formula-box">\(i = r + \pi^e\) (nominális kamat = reálkamat + várt infláció)</div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mt-2"><strong>Seigniorage:</strong> A pénzkibocsátásból származó állami bevétel (inflációs adó), ami elvonja a lakossági pénz vásárlóerejét:</p>
+                        <div class="formula-box">\(\text{Reál seigniorage} = \frac{\Delta M}{P} = \frac{\Delta M}{M} \cdot \frac{M}{P}\)</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="border-t border-slate-800/80 py-6 text-center text-sm text-slate-500">
+        Makroökonómia · Egyetemi Segédanyagok
+    </footer>
+
+    <script>
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase().trim();
+            const cards = document.querySelectorAll('.topic-card');
+            cards.forEach(card => {
+                const text = card.innerText.toLowerCase();
+                card.style.display = text.includes(query) ? 'block' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>

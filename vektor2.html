@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="hu" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gazdasági Matematika 2 | Teljes Tudástár</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    
+    <script>
+      MathJax = {
+        tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+        svg: { fontCache: 'global' }
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { 
+                        sans: ['Outfit', 'sans-serif'], 
+                        mono: ['Space Grotesk', 'monospace'] 
+                    },
+                    colors: { 
+                        primary: '#38bdf8', 
+                        darkbg: '#0f172a' 
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #0f172a;
+            color: #e2e8f0;
+            -webkit-font-smoothing: antialiased;
+            font-size: 1.05rem;
+        }
+        .clean-section {
+            background: rgba(30, 41, 59, 0.55);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .topic-card {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.2s ease;
+        }
+        .topic-card:hover {
+            border-color: rgba(56, 189, 248, 0.4);
+            transform: translateY(-2px);
+        }
+        .formula-box {
+            background: rgba(0, 0, 0, 0.5);
+            border-left: 4px solid #38bdf8;
+            padding: 1rem 1.25rem;
+            margin: 0.75rem 0;
+            border-radius: 0 0.75rem 0.75rem 0;
+            font-family: 'Space Grotesk', monospace;
+            font-size: 1.15rem;
+        }
+        .custom-nav-scroll {
+            scrollbar-width: thin;
+            scrollbar-color: #475569 rgba(15, 23, 42, 0.4);
+        }
+        .custom-nav-scroll::-webkit-scrollbar {
+            height: 7px;
+        }
+        .custom-nav-scroll::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 10px;
+        }
+        .custom-nav-scroll::-webkit-scrollbar-thumb {
+            background-color: #475569;
+            border-radius: 10px;
+        }
+        .custom-nav-scroll::-webkit-scrollbar-thumb:hover {
+            background-color: #38bdf8;
+        }
+    </style>
+</head>
+<body class="selection:bg-sky-400 selection:text-slate-900 min-h-screen flex flex-col justify-between">
+
+    <header class="sticky top-0 w-full z-40 bg-slate-900/95 border-b border-slate-800 backdrop-blur-md">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 h-18 py-3 flex items-center justify-between gap-4">
+            <a href="index.html" class="flex items-center gap-3 text-slate-300 hover:text-white transition-colors group">
+                <div class="w-10 h-10 rounded-xl bg-slate-800 group-hover:bg-primary group-hover:text-slate-900 flex items-center justify-center transition-all">
+                    <i class="fa-solid fa-arrow-left text-sm"></i>
+                </div>
+                <span class="text-sm uppercase font-mono tracking-wider font-bold hidden sm:inline">Portál</span>
+            </a>
+
+            <div class="relative flex-1 max-w-lg">
+                <i class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                <input type="text" id="searchInput" placeholder="Keresés a fogalmak, képletek között..." 
+                       class="bg-slate-800/90 border border-slate-700 rounded-xl py-2.5 pl-11 pr-4 text-sm sm:text-base focus:outline-none focus:border-primary w-full text-white placeholder-slate-400 transition-all">
+            </div>
+
+            <span class="text-sm font-mono text-primary font-bold hidden md:block">Gazdasági Matematika 2</span>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 py-10 flex-1 w-full">
+        <div class="mb-10">
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Lineáris Algebra & Vektorterek</h1>
+            <p class="text-slate-300 text-base sm:text-lg mt-2">Az előadásanyag összes definíciója, tétele és képlete jól olvasható, kényelmes formátumban.</p>
+        </div>
+
+        <div class="flex items-center gap-3 overflow-x-auto pb-4 mb-10 text-sm font-mono custom-nav-scroll">
+            <a href="#topic1" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 whitespace-nowrap transition-all shadow-sm font-semibold">1. Mátrixok</a>
+            <a href="#topic2" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 whitespace-nowrap transition-all shadow-sm font-semibold">2. Rⁿ tér</a>
+            <a href="#topic3" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 whitespace-nowrap transition-all shadow-sm font-semibold">3. Egyenletrendszerek</a>
+            <a href="#topic4" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 whitespace-nowrap transition-all shadow-sm font-semibold">4. Leképezések</a>
+            <a href="#topic5" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 whitespace-nowrap transition-all shadow-sm font-semibold">5. Kvadratikus formák</a>
+        </div>
+
+        <div id="content-area" class="space-y-12">
+            <!-- 1. TÉMAKÖR -->
+            <section id="topic1" class="clean-section rounded-2xl p-6 sm:p-9">
+                <div class="border-b border-slate-700/80 pb-4 mb-6">
+                    <span class="text-sm font-mono text-primary uppercase tracking-wider font-bold">I. Fejezet</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">Vektorok és Mátrixok</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-sky-400 bg-sky-400/10 border-sky-400/20">Definíció</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Mátrix</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed">Egy \(m\) sorral és \(n\) oszloppal rendelkező számtáblázatot \(m \times n\)-es mátrixnak nevezünk. Az elemeket \(a_{ij}\) jelöli.</p>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-purple-400 bg-purple-400/10 border-purple-400/20">Fogalom</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Négyzetes és Diagonális Mátrix</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed">Ha \(n = m\), a mátrix négyzetes. Ha a főátlón kívüli összes elem 0, diagonális mátrixról beszélünk. Háromszögmátrix: a főátló alatt vagy felett minden elem 0.</p>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-sky-400 bg-sky-400/10 border-sky-400/20">Definíció</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Egységmátrix (\(E_n\)) & Transzponált (\(A^T\))</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-2">Az egységmátrix főátlójában 1-esek, máshol 0-k állnak (\(E_m A = A E_n = A\)). A transzponáltnál a sorok és oszlopok felcserélődnek. Ha \(A^T = A\), a mátrix szimmetrikus.</p>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-emerald-400 bg-emerald-400/10 border-emerald-400/20">Tétel</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Determináns és Invertálhatóság</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-1">Négyzetes mátrixhoz rendelt valós szám. Egy mátrix pontosan akkor invertálható (\(A A^{-1} = E\)), ha reguláris, vagyis \(det(A) \neq 0\). Szinguláris mátrix esetén \(det(A) = 0\).</p>
+                        <div class="formula-box text-xs sm:text-sm">\(det(A^{-1}) = \frac{1}{det(A)} \quad \text{és} \quad det(AB) = det(A) \cdot det(B)\)</div>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl md:col-span-2">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-sky-400 bg-sky-400/10 border-sky-400/20">Módszer</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Mátrix rangja</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed">A mátrix soraiból (vagy oszlopaiból) álló vektorrendszer rangja, azaz az általuk kifeszített altér dimenziója. Gauss-eliminációval számoljuk: a lépcsős alakra hozás után megmaradó nem csupa nulla sorok száma adja a rangot.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. TÉMAKÖR -->
+            <section id="topic2" class="clean-section rounded-2xl p-6 sm:p-9">
+                <div class="border-b border-slate-700/80 pb-4 mb-6">
+                    <span class="text-sm font-mono text-indigo-400 uppercase tracking-wider font-bold">II. Fejezet</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">Az \(\mathbb{R}^n\) tér szerkezete és Alterei</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-sky-400 bg-sky-400/10 border-sky-400/20">Definíció</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Altér és Triviális Alterek</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed">A \(V\) vektortér egy nemüres \(W\) részhalmaza altér, ha maga is vektortér (zárt a vektorösszeadásra és a skalárral való szorzásra). Triviális alterek minden térben: \(\{0\}\) és a teljes \(V\) tér.</p>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-purple-400 bg-purple-400/10 border-purple-400/20">Térszerkezet</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">\(\mathbb{R}^2\) és \(\mathbb{R}^3\) alterei</h3>
+                        </div>
+                        <ul class="text-slate-200 text-sm sm:text-base space-y-1">
+                            <li>• <strong>\(\mathbb{R}^2\) alterei:</strong> Az origó \(\{0\}\), az origón áthaladó egyenesek, és a teljes sík (\(\mathbb{R}^2\)).</li>
+                            <li>• <strong>\(\mathbb{R}^3\) alterei:</strong> Az origó \(\{0\}\), az origón áthaladó egyenesek, az origón áthaladó síkok, és a teljes tér (\(\mathbb{R}^3\)).</li>
+                        </ul>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-sky-400 bg-sky-400/10 border-sky-400/20">Definíció</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Lineáris Függetlenség</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-2">Egy vektorrendszer lineárisan független, ha a nullvektor csak csupa nulla skalárral (triviálisan) állítható elő belőlük:</p>
+                        <div class="formula-box">\(\lambda_1 v_1 + \dots + \lambda_k v_k = 0 \iff \lambda_1 = \dots = \lambda_k = 0\)</div>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-emerald-400 bg-emerald-400/10 border-emerald-400/20">Struktúra</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Bázis, Dimenzió és Koordináták</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed">A bázis egy minimális generátorrendszer (lineárisan független generátorrendszer). A bázisvektorok száma a vektortér dimenziója (\(\dim V\)). A vektor egyértelmű előállítási együtthatói a bázisra vonatkozó koordinátái.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. TÉMAKÖR -->
+            <section id="topic3" class="clean-section rounded-2xl p-6 sm:p-9">
+                <div class="border-b border-slate-700/80 pb-4 mb-6">
+                    <span class="text-sm font-mono text-emerald-400 uppercase tracking-wider font-bold">III. Fejezet</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">Lineáris Egyenletrendszerek (LER)</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-purple-400 bg-purple-400/10 border-purple-400/20">Megoldhatóság</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Megoldhatósági kategóriák</h3>
+                        </div>
+                        <ul class="text-slate-200 text-sm sm:text-base space-y-1">
+                            <li>• <strong>Határozott:</strong> pontosan 1 megoldás létezik.</li>
+                            <li>• <strong>Határozatlan:</strong> egynél több (végtelen sok) megoldás létezik.</li>
+                            <li>• <strong>Ellentmondásos:</strong> nincs megoldás (pl. Gauss-elimináció során \([0 \; \dots \; 0 \mid c \neq 0]\) sor keletkezik).</li>
+                        </ul>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-emerald-400 bg-emerald-400/10 border-emerald-400/20">Tétel</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Rangkritérium (Kronecker–Capelli)</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-2">Az \(Ax = b\) rendszer pontosan akkor oldható meg, ha:</p>
+                        <div class="formula-box">\(rang(A) = rang(A \mid b)\)</div>
+                        <p class="text-slate-300 text-xs sm:text-sm mt-1">Ha a rang megegyezik az ismeretlenek számával (\(n\)), a rendszer határozott; ha kisebb annál, határozatlan.</p>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl md:col-span-2">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-sky-400 bg-sky-400/10 border-sky-400/20">Megoldástér</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Homogén és Inhomogén rendszerek</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed">Homogén rendszer (\(Ax = 0\)): a nullvektor mindig triviális megoldása, megoldáshalmaza egy \(n - rang(A)\) dimenziós altér. Inhomogén rendszer (\(Ax = b\)): megoldáshalmaza \(x_0 + H\) alakú, ahol \(x_0\) egy partikuláris megoldás, \(H\) pedig a megfelelő homogén rendszer megoldástere.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. TÉMAKÖR -->
+            <section id="topic4" class="clean-section rounded-2xl p-6 sm:p-9">
+                <div class="border-b border-slate-700/80 pb-4 mb-6">
+                    <span class="text-sm font-mono text-purple-400 uppercase tracking-wider font-bold">IV. Fejezet</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">Lineáris Leképezések és Sajátértékek</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-sky-400 bg-sky-400/10 border-sky-400/20">Definíció</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Lineáris transzformáció</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed">Olyan leképezés, amely művelettartó: additív (\(\varphi(v+w) = \varphi(v)+\varphi(w)\)) és homogén (\(\varphi(\lambda v) = \lambda \varphi(v)\)). Bázis rögzítése után minden leképezés leírható egy \(A\) transzformációs mátrixszal.</p>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-purple-400 bg-purple-400/10 border-purple-400/20">Geometria</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Sík transzformációinak mátrixai</h3>
+                        </div>
+                        <ul class="text-slate-200 text-xs sm:text-sm space-y-1">
+                            <li>• <strong>Nagyítás/kicsinyítés:</strong> \(\begin{pmatrix} \lambda & 0 \\ 0 & \lambda \end{pmatrix}\)</li>
+                            <li>• <strong>Origó körüli elforgatás \(\alpha\) szöggel:</strong> \(\begin{pmatrix} \cos\alpha & -\sin\alpha \\ \sin\alpha & \cos\alpha \end{pmatrix}\)</li>
+                            <li>• <strong>Tükrözés \(\alpha\) hajlásszögű egyenesre:</strong> \(\begin{pmatrix} \cos(2\alpha) & \sin(2\alpha) \\ \sin(2\alpha) & -\cos(2\alpha) \end{pmatrix}\)</li>
+                        </ul>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl md:col-span-2">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-emerald-400 bg-emerald-400/10 border-emerald-400/20">Sajátértékszámítás</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Sajátérték, Sajátvektor és Karakterisztikus Polinom</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-2">Egy nemnulla \(x\) vektor sajátvektor, ha létezik olyan \(\lambda\) szám, melyre \(Ax = \lambda x\). A sajátértékek a karakterisztikus egyenlet gyökei:</p>
+                        <div class="formula-box">\(det(A - \lambda E_n) = 0\)</div>
+                        <p class="text-slate-300 text-xs sm:text-sm mt-1">A sajátértékek szorzata egyenlő a mátrix determinánsával, összege pedig a főátlóbeli elemek összegével (nyom).</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. TÉMAKÖR -->
+            <section id="topic5" class="clean-section rounded-2xl p-6 sm:p-9">
+                <div class="border-b border-slate-700/80 pb-4 mb-6">
+                    <span class="text-xs font-mono text-pink-400 uppercase tracking-wider font-bold">V. Fejezet</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">Kvadratikus Formák & Euklideszi Terek</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-sky-400 bg-sky-400/10 border-sky-400/20">Képlet</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Kvadratikus forma</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-1">Egy szimmetrikus \(A\) mátrix által definiált homogén másodfokú leképezés:</p>
+                        <div class="formula-box">\(Q(x) = x^T A x = \sum_{i=1}^n \sum_{j=1}^n a_{ij} x_i x_j\)</div>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-emerald-400 bg-emerald-400/10 border-emerald-400/20">Tétel</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Definitségi Kategóriák</h3>
+                        </div>
+                        <ul class="text-slate-200 text-sm sm:text-base space-y-1">
+                            <li>• <strong>Pozitív definit:</strong> minden sajátérték \(\lambda_i > 0\) (bal felső sarokminorok mind pozitívak).</li>
+                            <li>• <strong>Pozitív szemidefinit:</strong> minden sajátérték \(\lambda_i \ge 0\).</li>
+                            <li>• <strong>Negatív definit:</strong> minden sajátérték \(\lambda_i < 0\) (sarokminorok váltakozó előjelűek: \(-, +, -, \dots\)).</li>
+                            <li>• <strong>Indefinit:</strong> pozitív és negatív sajátérték is előfordul.</li>
+                        </ul>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-sky-400 bg-sky-400/10 border-sky-400/20">Definíció</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Belső Szorzat & Norma</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-2">Szimmetrikus, pozitív definit \(A\) mátrix esetén \(\langle x, y \rangle_A = x^T A y\). A vektor normája (hossza):</p>
+                        <div class="formula-box">\(\|x\| = \sqrt{\langle x, x \rangle} = \sqrt{x^T A x}\)</div>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-emerald-400 bg-emerald-400/10 border-emerald-400/20">Geometria</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Ortogonalitás & Spektráltétel</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-2">Két vektor merőleges, ha \(\langle x, y \rangle = 0\). Ortogonális mátrix: \(Q^{-1} = Q^T\). <strong>Spektráltétel:</strong> minden valós szimmetrikus mátrix ortogonálisan diagonalizálható (létezik sajátvektorokból álló ortonormált bázis).</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="border-t border-slate-800/80 py-6 text-center text-sm text-slate-500">
+        Gazdasági Matematika 2 · Egyetemi Segédanyagok
+    </footer>
+
+    <script>
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase().trim();
+            const cards = document.querySelectorAll('.topic-card');
+            cards.forEach(card => {
+                const text = card.innerText.toLowerCase();
+                card.style.display = text.includes(query) ? 'block' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>

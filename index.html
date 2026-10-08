@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Egyetemi Tudástár | Portál & Kvíz</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { 
+                        sans: ['Outfit', 'sans-serif'], 
+                        mono: ['Space Grotesk', 'monospace'] 
+                    },
+                    colors: { 
+                        primary: '#38bdf8',
+                        darkbg: '#0f172a',
+                        cardbg: '#1e293b'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #0f172a;
+            color: #cbd5e1;
+            -webkit-font-smoothing: antialiased;
+        }
+        .portal-card {
+            background: rgba(30, 41, 59, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .portal-card:hover {
+            border-color: rgba(56, 189, 248, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px -5px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-primary selection:text-slate-900">
+
+    <header class="border-b border-slate-800 bg-slate-900/60 sticky top-0 z-30 backdrop-blur-md">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
+                    <i class="fa-solid fa-graduation-cap text-base"></i>
+                </div>
+                <span class="font-bold text-white tracking-wide text-lg">Egyetemi Tudástár</span>
+            </div>
+            <button onclick="openQuizModal()" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 border border-primary/30 text-primary hover:bg-primary hover:text-slate-900 font-semibold text-xs sm:text-sm transition-all">
+                <i class="fa-solid fa-bolt"></i>
+                <span>Gyakorló Kvíz</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 py-10 w-full flex-1">
+        
+        <div class="text-center max-w-2xl mx-auto mb-10">
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-3">
+                Vizsgafelkészítő & Fogalomtárak
+            </h1>
+            <p class="text-slate-400 text-sm sm:text-base font-light">
+                Strukturált tételek, levezetések és önellenőrző kérdések a félév tárgyaihoz.
+            </p>
+        </div>
+
+        <!-- Tantárgykártyák leírás nélkül, két gombbal -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <!-- Gazdasági matematika 2 -->
+            <div class="portal-card rounded-2xl p-6 sm:p-7 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs font-mono uppercase tracking-wider text-sky-400 bg-sky-400/10 px-2.5 py-1 rounded-md border border-sky-400/20 font-bold">Kvantitatív</span>
+                        <i class="fa-solid fa-square-root-variable text-slate-500 text-lg"></i>
+                    </div>
+                    <h2 class="text-xl sm:text-2xl font-bold text-white mb-6">Gazdasági matematika 2</h2>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4 border-t border-slate-800">
+                    <a href="vektor2.html" class="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-primary/10 hover:bg-primary text-primary hover:text-slate-900 border border-primary/30 rounded-xl text-sm font-semibold transition-all">
+                        <span>Tudástár</span>
+                        <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                    <button onclick="startSubjectQuiz('matek')" class="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-xl text-sm font-semibold transition-all">
+                        <i class="fa-solid fa-circle-question text-sky-400"></i>
+                        <span>Kvíz indítása</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Makroökonómia -->
+            <div class="portal-card rounded-2xl p-6 sm:p-7 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs font-mono uppercase tracking-wider text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded-md border border-amber-400/20 font-bold">Közgazdaságtan</span>
+                        <i class="fa-solid fa-chart-line text-slate-500 text-lg"></i>
+                    </div>
+                    <h2 class="text-xl sm:text-2xl font-bold text-white mb-6">Makroökonómia</h2>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4 border-t border-slate-800">
+                    <a href="makro.html" class="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-amber-400/10 hover:bg-amber-400 text-amber-300 hover:text-slate-900 border border-amber-400/30 rounded-xl text-sm font-semibold transition-all">
+                        <span>Tudástár</span>
+                        <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                    <button onclick="startSubjectQuiz('makro')" class="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-xl text-sm font-semibold transition-all">
+                        <i class="fa-solid fa-circle-question text-amber-400"></i>
+                        <span>Kvíz indítása</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Pénzügytan -->
+            <div class="portal-card rounded-2xl p-6 sm:p-7 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs font-mono uppercase tracking-wider text-emerald-400 bg-emerald-400/10 px-2.5 py-1 rounded-md border border-emerald-400/20 font-bold">Pénzügyek</span>
+                        <i class="fa-solid fa-coins text-slate-500 text-lg"></i>
+                    </div>
+                    <h2 class="text-xl sm:text-2xl font-bold text-white mb-6">Pénzügytan</h2>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4 border-t border-slate-800">
+                    <a href="penzugy.html" class="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-emerald-400/10 hover:bg-emerald-400 text-emerald-300 hover:text-slate-900 border border-emerald-400/30 rounded-xl text-sm font-semibold transition-all">
+                        <span>Tudástár</span>
+                        <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                    <button onclick="startSubjectQuiz('penzugy')" class="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-xl text-sm font-semibold transition-all">
+                        <i class="fa-solid fa-circle-question text-emerald-400"></i>
+                        <span>Kvíz indítása</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Statisztika -->
+            <div class="portal-card rounded-2xl p-6 sm:p-7 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs font-mono uppercase tracking-wider text-purple-400 bg-purple-400/10 border-purple-400/20 px-2.5 py-1 rounded-md font-bold">Adatelemzés</span>
+                        <i class="fa-solid fa-chart-pie text-slate-500 text-lg"></i>
+                    </div>
+                    <h2 class="text-xl sm:text-2xl font-bold text-white mb-6">Statisztika</h2>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4 border-t border-slate-800">
+                    <a href="stat.html" class="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-purple-400/10 hover:bg-purple-400 text-purple-300 hover:text-slate-900 border border-purple-400/30 rounded-xl text-sm font-semibold transition-all">
+                        <span>Tudástár</span>
+                        <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                    <button onclick="startSubjectQuiz('stat')" class="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-xl text-sm font-semibold transition-all">
+                        <i class="fa-solid fa-circle-question text-purple-400"></i>
+                        <span>Kvíz indítása</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Beépített Kvíz Modál -->
+    <div id="quiz-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden">
+        <div class="absolute inset-0 bg-slate-950/85 backdrop-blur-sm" onclick="closeQuizModal()"></div>
+        
+        <div class="relative w-full max-w-2xl bg-slate-900 border border-slate-700/80 rounded-2xl shadow-2xl p-6 sm:p-8 z-10 flex flex-col">
+            
+            <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
+                <div>
+                    <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-bolt text-primary"></i>
+                        <span>Gyakorló Kvíz</span>
+                    </h3>
+                    <p class="text-xs text-slate-400 mt-0.5">Válassz tantárgyat és kérdésszámot az önellenőrzéshez.</p>
+                </div>
+                <button onclick="closeQuizModal()" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition-all">
+                    <i class="fa-solid fa-xmark text-sm"></i>
+                </button>
+            </div>
+
+            <!-- Beállító panel -->
+            <div id="quiz-setup" class="space-y-5">
+                <div>
+                    <label class="block text-xs font-mono uppercase tracking-wider text-slate-400 mb-2 font-semibold">Tantárgy kiválasztása:</label>
+                    <select id="quiz-subject-select" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-primary">
+                        <option value="all">Minden tantárgy vegyesen</option>
+                        <option value="matek">Gazdasági matematika 2</option>
+                        <option value="makro">Makroökonómia</option>
+                        <option value="penzugy">Pénzügytan</option>
+                        <option value="stat">Statisztika 1</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-mono uppercase tracking-wider text-slate-400 mb-2 font-semibold">Kérdések száma:</label>
+                    <select id="quiz-count-select" class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-primary">
+                        <option value="5">5 kérdés</option>
+                        <option value="10" selected>10 kérdés</option>
+                        <option value="20">20 kérdés</option>
+                        <option value="30">30 kérdés</option>
+                        <option value="40">40 kérdés</option>
+                    </select>
+                </div>
+
+                <div class="pt-4 border-t border-slate-800 flex justify-end">
+                    <button onclick="generateAndStartQuiz()" class="w-full sm:w-auto px-6 py-3 bg-primary text-slate-900 rounded-xl font-bold text-sm hover:opacity-90 transition-all flex items-center justify-center gap-2">
+                        <span>Teszt indítása</span>
+                        <i class="fa-solid fa-play text-xs"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Kérdés futtató panel -->
+            <div id="quiz-runner" class="hidden flex-col">
+                <div class="flex items-center justify-between text-xs font-mono text-slate-400 mb-3">
+                    <span id="quiz-progress">1 / 10. kérdés</span>
+                    <span id="quiz-subject-badge" class="px-2 py-0.5 rounded bg-slate-800 text-primary border border-slate-700">Tantárgy</span>
+                </div>
+
+                <div class="bg-slate-800/60 p-4 sm:p-5 rounded-xl border border-slate-700/60 mb-5">
+                    <h4 id="quiz-question-text" class="text-base sm:text-lg font-bold text-white leading-relaxed">Kérdés</h4>
+                </div>
+
+                <div id="quiz-options" class="space-y-3 mb-6"></div>
+
+                <div id="quiz-feedback" class="hidden p-4 rounded-xl text-sm font-semibold mb-4"></div>
+
+                <div class="flex justify-end">
+                    <button id="quiz-next-btn" onclick="nextQuestion()" class="hidden px-5 py-2.5 bg-primary text-slate-900 rounded-xl font-bold text-sm hover:opacity-90 transition-all">
+                        Következő kérdés <i class="fa-solid fa-arrow-right ml-1.5 text-xs"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Eredmény panel -->
+            <div id="quiz-result" class="hidden text-center py-6">
+                <div class="w-16 h-16 rounded-full bg-primary/10 border border-primary/20 text-primary flex items-center justify-center mx-auto text-2xl mb-4">
+                    <i class="fa-solid fa-trophy"></i>
+                </div>
+                <h4 class="text-2xl font-bold text-white mb-2">Kvíz befejezve!</h4>
+                <p id="quiz-score-text" class="text-slate-300 text-lg mb-6">Elért pontszám: 10 / 10 (100%)</p>
+                <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                    <button onclick="resetQuizSetup()" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-white rounded-xl font-semibold text-sm transition-all border border-slate-700">
+                        Új kvíz beállítása
+                    </button>
+                    <button onclick="closeQuizModal()" class="px-5 py-2.5 bg-primary text-slate-900 rounded-xl font-bold text-sm hover:opacity-90 transition-all">
+                        Bezárás
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="border-t border-slate-800 py-6 text-center text-xs text-slate-500">
+        Egyetemi Segédanyagok & Tanulástámogató Rendszer
+    </footer>
+
+    <script>
+        // Kiterjesztett kérdésbank: 30+ kérdés mind a 4 tárgyból
+        const questionPool = [
+            // ==================== GAZDASÁGI MATEMATIKA 2 ====================
+            { subject: 'matek', q: 'Mikor nevezünk egy négyzetes mátrixot szingulárisnak?', a: ['Ha determinánsa nulla', 'Ha nem invertálható és nem négyzetes', 'Ha a főátlójában csak egyesek vannak', 'Ha szimmetrikus'], correct: 0 },
+            { subject: 'matek', q: 'Mit állít a Kronecker-Capelli tétel a lineáris egyenletrendszerek megoldhatóságáról?', a: ['Pontosan akkor oldható meg, ha rang(A) = rang(A|b)', 'Pontosan akkor oldható meg, ha det(A) ≠ 0', 'Csak akkor van megoldás, ha a rendszer homogén', 'Pontosan akkor oldható meg, ha az egyenletek száma egyenlő az ismeretlenekével'], correct: 0 },
+            { subject: 'matek', q: 'Melyik egyenlet gyökei szolgáltatják az A mátrix sajátértékeit?', a: ['det(A - λE) = 0', 'Ax = 0', 'A^T = A', 'det(A) = λ'], correct: 0 },
+            { subject: 'matek', q: 'Mikor mondjuk, hogy egy kvadratikus forma pozitív definit?', a: ['Ha minden sajátértéke szigorúan pozitív (λ > 0)', 'Ha legalább egy sajátértéke pozitív', 'Ha determinánsa nulla', 'Ha minden sarokfőminora negatív'], correct: 0 },
+            { subject: 'matek', q: 'Mikor alkot bázist egy vektorrendszer a V vektortérben?', a: ['Ha lineárisan független generátorrendszer', 'Ha elemeinek száma végtelen', 'Ha tartalmazza a nullvektort', 'Ha elemei páronként párhuzamosak'], correct: 0 },
+            { subject: 'matek', q: 'Mennyi a triviális alterek száma tetszőleges nemnulla vektortérben?', a: ['Legalább kettő: a {0} és a teljes tér V', 'Pontosan egy', 'Végtelen sok', 'Nincs triviális altér'], correct: 0 },
+            { subject: 'matek', q: 'Milyen tulajdonság jellemzi az ortogonális mátrixokat?', a: ['Q^(-1) = Q^T', 'det(Q) = 0', 'Főátlója csupa nulla', 'Nem invertálható'], correct: 0 },
+            { subject: 'matek', q: 'Hogyan számítható egy x vektor normája (hossza) az euklideszi térben?', a: ['||x|| = gyök(<x, x>)', '||x|| = <x, x>^2', '||x|| = x^T + x', '||x|| = det(x)'], correct: 0 },
+            { subject: 'matek', q: 'Milyen kapcsolat van két vektor között, ha skaláris szorzatuk nulla (<x, y> = 0)?', a: ['Merőlegesek (ortogonálisak)', 'Párhuzamosak', 'Egyenlőek', 'Lineárisan függőek'], correct: 0 },
+            { subject: 'matek', q: 'Mi az inverze egy szorzatnak: (AB)^(-1)?', a: ['B^(-1) A^(-1)', 'A^(-1) B^(-1)', 'A^T B^T', 'Nem létezik'], correct: 0 },
+            { subject: 'matek', q: 'Mi a determináns geometriai jelentése 2x2-es esetben?', a: ['A sorvektorok által kifeszített parallelogramma előjeles területe', 'A mátrix nyoma', 'A vektorok hossza', 'A sajátértékek összege'], correct: 0 },
+            { subject: 'matek', q: 'Hány dimenziós az Ax = 0 homogén lineáris egyenletrendszer megoldástere?', a: ['n - rang(A)', 'rang(A)', 'Mindig n', 'Mindig 0'], correct: 0 },
+            { subject: 'matek', q: 'Milyen mátrix transzformálja a sík vektorait az origó körül α szöggel?', a: ['[cos α, -sin α; sin α, cos α]', '[sin α, cos α; cos α, -sin α]', '[λ, 0; 0, λ]', '[1, α; 0, 1]'], correct: 0 },
+            { subject: 'matek', q: 'Mit állít a szimmetrikus mátrixok spektráltétele?', a: ['Minden valós szimmetrikus mátrix ortogonálisan diagonalizálható', 'Nincs valós sajátértékük', 'Nem invertálhatók', 'Csak pozitív determinánsuk lehet'], correct: 0 },
+            { subject: 'matek', q: 'Mikor mondunk egy vektorrendszert lineárisan függőnek?', a: ['Ha a nullvektor előállítható nem csupa nulla együtthatójú lineáris kombinációként', 'Ha nem tartalmazza a nullvektort', 'Ha bázist alkot', 'Ha minden skalár szorzata 1'], correct: 0 },
+            { subject: 'matek', q: 'Mennyi egy diagonális mátrix determinánsa?', a: ['A főátlóbeli elemek szorzata', 'A mellékátló összege', 'Mindig 1', 'Mindig 0'], correct: 0 },
+            { subject: 'matek', q: 'Milyen összefüggés áll fenn a determináns és a sajátértékek között?', a: ['A sajátértékek szorzata egyenlő a determinánssal', 'A sajátértékek összege a determináns', 'Nincs összefüggés', 'A determináns a legnagyobb sajátérték'], correct: 0 },
+            { subject: 'matek', q: 'Mi történik a determináns értékével, ha felcserélünk két sort?', a: ['Előjelet vált (-1-szeresére változik)', 'Nem változik', 'Nulla lesz', 'Megduplázódik'], correct: 0 },
+            { subject: 'matek', q: 'Mi a Sylvester-kritérium lényege?', a: ['A kvadratikus forma definitsége eldönthető a sarokfőminorok előjeléből', 'Megadja a mátrix inverzét', 'Kiszámítja az egyenletrendszer rangját', 'Bázist keres'], correct: 0 },
+            { subject: 'matek', q: 'Mi az n különböző elem lehetséges sorbarendezéseinek a száma?', a: ['n! (permutáció)', '2^n', 'n^2', 'n(n-1)/2'], correct: 0 },
+            { subject: 'matek', q: 'Melyik képlet adja meg n elem k-adosztályú ismétlés nélküli kombinációinak számát?', a: ['n! / (k! (n-k)!)', 'n! / (n-k)!', 'n^k', '(n+k-1)!'], correct: 0 },
+            { subject: 'matek', q: 'Mikor nevezünk egy valószínűségi mezőt klasszikusnak?', a: ['Ha az eseménytér véges és minden elemi esemény egyenlően valószínű', 'Ha folytonos eloszlású', 'Ha a kísérletet végtelen sokszor ismételjük', 'Ha a valószínűség mindig 1'], correct: 0 },
+            { subject: 'matek', q: 'Mi a feltételes valószínűség P(A|B) definíciója?', a: ['P(AB) / P(B)', 'P(A) · P(B)', 'P(A) + P(B) - P(AB)', 'P(B) / P(A)'], correct: 0 },
+            { subject: 'matek', q: 'Mikor független két esemény (A és B)?', a: ['Ha P(AB) = P(A) · P(B)', 'Ha kizárják egymást (diszjunktak)', 'Ha P(A|B) = 0', 'Ha összegük a biztos esemény'], correct: 0 },
+            { subject: 'matek', q: 'Mi a Bayes-tétel lényege?', a: ['A feltételes valószínűségek megfordítása a tapasztalat tükrében', 'A szórásnégyzet kiszámítása', 'A várható érték linearitása', 'A nagy számok törvénye'], correct: 0 },
+            { subject: 'matek', q: 'Milyen tulajdonságú egy diszkrét valószínűségi változó eloszlásfüggvénye?', a: ['Monoton növekvő és jobbról/balról folytonos lépcsős függvény', 'Folytonos és deriválható', 'Szigorúan csökkenő', 'Konstans nulla'], correct: 0 },
+            { subject: 'matek', q: 'Mennyi a Poisson-eloszlás várható értéke és szórásnégyzete?', a: ['Mindkettő λ', 'Várható érték λ, szórásnégyzet λ^2', 'Mindkettő np', 'Várható érték 1/λ'], correct: 0 },
+            { subject: 'matek', q: 'Melyik eloszlás sűrűségfüggvénye a híres Gauss-féle haranggörbe?', a: ['Normális eloszlás', 'Exponenciális eloszlás', 'Egyenletes eloszlás', 'Binomiális eloszlás'], correct: 0 },
+            { subject: 'matek', q: 'Hogyan standardizálunk egy X ~ N(m, σ^2) normális változót?', a: ['(X - m) / σ', '(X - σ) / m', 'X · m / σ', 'X^2 - m^2'], correct: 0 },
+            { subject: 'matek', q: 'Mit mér a valószínűségi változók korrelációs együtthatója?', a: ['Két változó közötti lineáris kapcsolat szorosságát és irányát (-1 és +1 között)', 'A változók átlagos értékét', 'A maximum és minimum különbségét', 'A sűrűségfüggvény meredekségét'], correct: 0 },
+            { subject: 'matek', q: 'Mit jelent a ferdeség (skewness) pozitív értéke?', a: ['Jobbra elnyúló, hosszú jobb oldali farokkal rendelkező eloszlást', 'Szimmetrikus eloszlást', 'Balra elnyúló eloszlást', 'Kétpúpú eloszlást'], correct: 0 },
+
+            // ==================== MAKROÖKONÓMIA ====================
+            { subject: 'makro', q: 'Mi a Bruttó Hazai Termék (GDP) definíciója?', a: ['Egy ország területén adott időszak alatt előállított végső javak és szolgáltatások piaci értéke', 'A hazai állampolgárok által a világon megtermelt összes jövedelem', 'A vállalatok összes értékesítési árbevétele', 'A nemzeti vagyon piaci értéke'], correct: 0 },
+            { subject: 'makro', q: 'Hogyan kapjuk meg a GNI-t a GDP-ből?', a: ['GNI = GDP + BRee (elsődleges külföldi tényezőjövedelmek egyenlege)', 'GNI = GDP - Amortizáció', 'GNI = GDP + C + I', 'GNI = GDP - Költségvetési deficit'], correct: 0 },
+            { subject: 'makro', q: 'Mi a hozzáadott érték a termelésben?', a: ['Kibocsátási érték mínusz a felhasznált termelői inputok értéke', 'A profit és az adók összege', 'A nettó árbevétel és amortizáció szorzata', 'Az eladott áruk beszerzési értéke'], correct: 0 },
+            { subject: 'makro', q: 'Milyen kosárral számol a fogyasztóiár-index (CPI)?', a: ['Bázisévi rögzített fogyasztói kosárral (Laspeyres-típusú)', 'Adott évi folyó termelési kosárral (Paasche-típusú)', 'Csak belföldi beruházási javakkal', 'Exportált javak kosarával'], correct: 0 },
+            { subject: 'makro', q: 'Mi a GDP-deflátor képlete?', a: ['(Nominális GDP / Reál GDP) × 100', '(Reál GDP / Nominális GDP) × 100', 'CPI / PPI', 'Inflációs ráta × 100'], correct: 0 },
+            { subject: 'makro', q: 'Mi a CPI helyettesítési torzításának lényege?', a: ['Mivel a kosár fix, nem veszi figyelembe az olcsóbb jószágra való átváltást, így túlbecsli a megélhetési költségeket', 'Alulbecsli az áremelkedést', 'Nem méri az exportot', 'Figyelmen kívül hagyja a béreket'], correct: 0 },
+            { subject: 'makro', q: 'Mit jelent a klasszikus modellben a pénz semlegessége hosszú távon?', a: ['A pénzkínálat változása csak az árszínvonalat emeli, a reálkibocsátásra és reálbérre nincs hatással', 'A pénzmennyiség közvetlenül növeli a reál GDP-t', 'Nincs infláció a gazdaságban', 'A kamatláb nullára esik'], correct: 0 },
+            { subject: 'makro', q: 'Mi a mennyiségi pénzelmélet csereegyenlete?', a: ['M · V = P · Y', 'M / P = r · Y', 'S = I + G', 'Y = C + I + G'], correct: 0 },
+            { subject: 'makro', q: 'Mit állít a Fisher-egyenlet a kamatlábakról?', a: ['Nominális kamatláb = Reálkamatláb + Várt infláció (i = r + π^e)', 'Reálkamatláb = Nominális kamatláb × Infláció', 'Kamatláb = Kormányzati kiadások / Pénzmennyiség', 'A nominális kamat mindig konstans'], correct: 0 },
+            { subject: 'makro', q: 'Mi a seigniorage?', a: ['A pénzkibocsátásból származó állami haszon (inflációs adó)', 'A külkereskedelmi vámbevételek összege', 'A jegybanki kamatfolyosó szélessége', 'A kereskedelmi bankok profitja'], correct: 0 },
+            { subject: 'makro', q: 'Mi a kiszorítási hatás (crowding-out) zárt gazdaságban?', a: ['A növekvő állami kiadások (G) felhajtják a reálkamatlábat, ami csökkenti a magánberuházásokat (I)', 'Az export kiszorítja az importot', 'A magas adók csökkentik a pénzkínálatot', 'A megtakarítások nullára csökkennek'], correct: 0 },
+            { subject: 'makro', q: 'Hogyan számolható a nemzeti megtakarítás (S) zárt gazdaságban?', a: ['S = Sp + Sg = Y - C - G', 'S = Y - T', 'S = I + NX', 'S = G - T'], correct: 0 },
+            { subject: 'makro', q: 'Milyen feltétel mellett maximális a versenyző vállalat profitja a munkapiacon?', a: ['MPL = W / P (a munka határterméke egyenlő a reálbérrel)', 'MPL = P / W', 'MPL = 0', 'W = P · Y'], correct: 0 },
+            { subject: 'makro', q: 'Mit állít az Euler-tétel állandó skálahozadék és tökéletes verseny mellett?', a: ['Y = MPL · L + MPK · K (a tényezőköltségek kimerítik a teljes kibocsátást, gazdasági profit = 0)', 'A profit mindig meghaladja a kibocsátást', 'A munka határterméke konstans', 'A tőkejövedelem nulla'], correct: 0 },
+            { subject: 'makro', q: 'A Cobb-Douglas függvényben (Y = A K^α L^(1-α)) mekkora a tőke jövedelemrészesedése?', a: ['α', '1 - α', 'A', 'K / L'], correct: 0 },
+            { subject: 'makro', q: 'Mi alkotja a monetáris bázist (MB vagy M0)?', a: ['Forgalomban lévő készpénz + banki tartalékok a jegybanknál (C + R)', 'Készpénz + látra szóló betétek (C + D)', 'Minden bankbetét', 'Állampapírok állománya'], correct: 0 },
+            { subject: 'makro', q: 'Melyik a leglikvidebb pénzaggregátum (M1)?', a: ['Készpénz + folyószámlabetétek (C + D)', 'Monetáris bázis + devizatartalék', 'M2 + 2 éves betétek', 'Befektetési jegyek'], correct: 0 },
+            { subject: 'makro', q: 'Hogyan függ a pénzmultiplikátor (m) a kötelező tartalékrátától (rr)?', a: ['Ha rr nő, a multiplikátor és a pénzkínálat csökken', 'Ha rr nő, a multiplikátor nő', 'Nincs összefüggés', 'A multiplikátor független a jegybanktól'], correct: 0 },
+            { subject: 'makro', q: 'Melyek a monetáris politika fő eszközei?', a: ['Kötelező tartalékráta, jegybanki alapkamat/kamatfolyosó, nyílt piaci műveletek', 'Adókivetés, állami segélyek, vámszabályozás', 'Befektetési hitelek, árrögzítés', 'Minimálbér megállapítása'], correct: 0 },
+            { subject: 'makro', q: 'Milyen típusú inflációt jelent az étlap-költség és cipőtalp-költség?', a: ['A várt infláció társadalmi költségeit', 'A defláció veszélyeit', 'A hiperinfláció megszűnését', 'Az importárak növekedését'], correct: 0 },
+            { subject: 'makro', q: 'Mit nevezünk stagflációnak?', a: ['Magas infláció és gazdasági stagnálás/recesszió egyidejű fennállását', 'Gyors gazdasági növekedést deflációval', 'Nulla munkanélküliséget', 'Stabil árszínvonalat'], correct: 0 },
+            { subject: 'makro', q: 'Mi az autonóm fogyasztás (C0)?', a: ['A jövedelemtől független, minimális megélhetést biztosító fogyasztás', 'A jövedelemmel arányosan növő fogyasztás', 'A megtakarítások kamata', 'Az állami vásárlások része'], correct: 0 },
+            { subject: 'makro', q: 'Mi a fogyasztási hatéhajlandóság (c)?', a: ['Megmutatja, hogy a jövedelem 1 egységnyi növekedésével mennyivel nő a fogyasztás (0 < c < 1)', 'A teljes fogyasztás és jövedelem hányadosa', 'Az autonóm fogyasztás reciproka', 'Mindig pontosan 1'], correct: 0 },
+            { subject: 'makro', q: 'Milyen meredekségű a beruházási kereslet a reálkamatláb függvényében?', a: ['Negatív meredekségű (a magasabb kamat csökkenti a beruházási kedvet)', 'Pozitív meredekségű', 'Függőleges', 'Vízszintes'], correct: 0 },
+            { subject: 'makro', q: 'Hogyan tisztul meg a kölcsönforrások piaca a klasszikus modellben?', a: ['A reálkamatláb rugalmas változásával áll be az S = I egyensúly', 'Az állam kötelező beruházási kvótát ír elő', 'A jegybank rögzíti a nominális árakat', 'Csak külföldi tőkebevonással'], correct: 0 },
+            { subject: 'makro', q: 'Mi történik a kölcsönforrások piacán, ha a kormányzati deficit nő?', a: ['A megtakarítási kínálat csökken, a reálkamatláb emelkedik, a beruházás csökken', 'A kamatláb azonnal lecsökken', 'A beruházások ugrásszerűen megnőnek', 'Nincs hatása a piacra'], correct: 0 },
+            { subject: 'makro', q: 'Milyen pénz a modern bankrendszer pénze?', a: ['Belső érték nélküli hitelpénz, a belé vetett bizalom adja az értékét', 'Nemesfémfedezetű árupénz', 'Csak államkötvényekből álló pénz', 'Nem minősül pénzügyi eszköznek'], correct: 0 },
+            { subject: 'makro', q: 'Mi történik nyílt piaci értékpapír-vásárláskor?', a: ['A jegybank értékpapírt vesz, pénzt juttat a bankrendszerbe, nő a monetáris bázis', 'A jegybank pénzt von ki a forgalomból', 'A kötelező tartalékráta megnő', 'Csökken a bankok likviditása'], correct: 0 },
+            { subject: 'makro', q: 'Mi a Cagan-féle hiperinflációs kritérium?', a: ['Legalább havi 50%-os áremelkedés tartósan', 'Évi 10%-os infláció', 'Napi 1%-os árfolyamesés', 'Kétjegyű éves áremelkedés'], correct: 0 },
+            { subject: 'makro', q: 'Hogyan viszonyul egymáshoz a nominális bér és a reálbér?', a: ['Reálbér = Nominális bér / Árszínvonal (W/P)', 'Reálbér = W · P', 'Reálbér = W + P', 'Reálbér megegyezik a minimálbérrel'], correct: 0 },
+
+            // ==================== VÁLLALATI PÉNZÜGYEK ====================
+            { subject: 'penzugy', q: 'Mi az alapvető döntési szabály a Nettó Jelenérték (NPV) módszernél?', a: ['Elfogadjuk a projektet, ha NPV > 0', 'Elfogadjuk, ha NPV = 0', 'Csak akkor fogadjuk el, ha a megtérülési idő 1 év', 'Elvetjük, ha pozitív'], correct: 0 },
+            { subject: 'penzugy', q: 'Hogyan számítható egy t időpontbeli pénzáramlás jelenértéke?', a: ['PV = C_t / (1 + r)^t', 'PV = C_t · (1 + r)^t', 'PV = C_t / r^t', 'PV = C_t · t / r'], correct: 0 },
+            { subject: 'penzugy', q: 'Mi az örökjáradék jelenértékének képlete?', a: ['PV = C / r', 'PV = C · r', 'PV = C / (1 + r)', 'PV = C / r^2'], correct: 0 },
+            { subject: 'penzugy', q: 'Mi az annuitás fogalma?', a: ['Meghatározott ideig tartó, azonos összegű periodikus pénzáramlás-sorozat', 'Végtelen ideig tartó pénzáramlás', 'Egyetlen egyszeri kifizetés a lejáratkor', 'A részvények osztaléka'], correct: 0 },
+            { subject: 'penzugy', q: 'Milyen képlettel becsülhető a részvény elméleti árfolyama a Gordon-modellben?', a: ['P0 = DIV1 / (r - g)', 'P0 = EPS / r', 'P0 = DIV1 · (r + g)', 'P0 = NPV / C0'], correct: 0 },
+            { subject: 'penzugy', q: 'Mi a Belső Megtérülési Ráta (IRR)?', a: ['Az a diszkontráta, amely mellett a projekt NPV-je pontosan nulla', 'A projekt tényleges számviteli nyeresége', 'A tőkepiaci kockázatmentes hozam', 'A hitel kamatlába'], correct: 0 },
+            { subject: 'penzugy', q: 'Melyik az IRR egyik ismert veszélyes csapdája?', a: ['Nem konvencionális pénzáramlásnál több valós belső megtérülési ráta is adódhat', 'Mindig alacsonyabb értéket ad, mint az NPV', 'Nem használható pozitív kamatokra', 'Csak 1 éves projekteknél működik'], correct: 0 },
+            { subject: 'penzugy', q: 'Mi a Jövedelmezőségi Index (PI) képlete?', a: ['PI = NPV / C0 vagy PV / C0', 'PI = C0 / NPV', 'PI = IRR / r', 'PI = EPS / P0'], correct: 0 },
+            { subject: 'penzugy', q: 'Mikor alkalmazunk Éves Költség-egyenértékest (EAC)?', a: ['Eltérő élettartamú, folyamatosan megújuló beruházások összehasonlításakor', 'Csak részvényértékelésnél', 'A hitelkamatok törlesztésére', 'Az osztalékfizetés meghatározására'], correct: 0 },
+            { subject: 'penzugy', q: 'Hogyan számolható az Éves Költség-egyenértékes (EAC)?', a: ['EAC = Költségek Jelenértéke (PV) / Annuitásfaktor', 'EAC = PV · Annuitásfaktor', 'EAC = NPV / n', 'EAC = C0 · r'], correct: 0 },
+            { subject: 'penzugy', q: 'Mit jelent a Növekedési Lehetőségek Jelenértéke (PVGO)?', a: ['A vállalat jövőbeli pozitív NPV-jű beruházásainak mai értéke', 'A múltbeli osztalékok összege', 'A cég adósságának piaci értéke', 'A könyv szerinti vagyon'], correct: 0 },
+            { subject: 'penzugy', q: 'Hogyan bontja fel a DuPont-modell a sajáttőke-arányos nyereséget (ROE)?', a: ['Tőkeáttétel × Eszközforgalom × Nettó haszonkulcs × Kamatteher', 'Árbevétel / Saját tőke', 'EBIT / Adó', 'NPV / Beruházás'], correct: 0 },
+            { subject: 'penzugy', q: 'Mi a likviditási gyorsráta (Acid test) számlálója?', a: ['Pénzeszközök + Értékpapírok + Vevőkövetelések (készletek nélkül)', 'Összes forgóeszköz', 'Befektetett eszközök', 'Saját tőke'], correct: 0 },
+            { subject: 'penzugy', q: 'Hogyan kell kezelni az elsüllyedt költségeket (sunk costs) a beruházás értékelésekor?', a: ['Figyelmen kívül kell hagyni őket, mert a jövőbeli döntéstől függetlenül felmerültek', 'Hozzá kell adni a kezdeti ráfordításhoz', 'Diszkontálni kell őket', 'Csökkentik az adóalapot'], correct: 0 },
+            { subject: 'penzugy', q: 'Mi az értékcsökkenési adópajzs értéke?', a: ['Amortizáció × Társasági adókulcs (Amortizáció · Tc)', 'Amortizáció / Adókulcs', 'Adózott eredmény - Amortizáció', 'EBIT · Tc'], correct: 0 },
+            { subject: 'penzugy', q: 'Mi a fenntartható növekedési ráta (g)?', a: ['g = Újrabefektetési ráta × ROE', 'g = Osztalékfizetési ráta × ROA', 'g = r - DIV1', 'g = P/E × EPS'], correct: 0 },
+            { subject: 'penzugy', q: 'Mi a Tobin-féle Q mutató?', a: ['A vállalat eszközeinek piaci értéke osztva a becsült újrapótlási költséggel', 'Részvényárfolyam / EPS', 'Könyv szerinti érték / Piaci érték', 'Adósság / Saját tőke'], correct: 0 },
+            { subject: 'penzugy', q: 'Mi a nettó forgótőke (NWC)?', a: ['Forgóeszközök - Rövid lejáratú kötelezettségek', 'Összes eszköz - Összes forrás', 'Készpénz + Készletek', 'Befektetett eszközök nettó értéke'], correct: 0 },
+            { subject: 'penzugy', q: 'Hogyan hat a forgótőke növekedése a projekt pénzáramlására?', a: ['Pénzkiadásként jelentkezik (csökkenti az adott évi cash flow-t)', 'Pénzbevételt jelent', 'Nincs hatása a pénzáramlásra', 'Közvetlenül növeli a profitot'], correct: 0 },
+            { subject: 'penzugy', q: 'Mi a tőke alternatívaköltsége?', a: ['A hasonló kockázatú befektetési lehetőségeken elérhető elvárt piaci hozam', 'A hitel törlesztőrészlete', 'Az inflációs ráta', 'A számviteli nyereség'], correct: 0 },
+            { subject: 'penzugy', q: 'Mi a különbség a kincstárnok (treasurer) és a számvevő (controller) között?', a: ['A kincstárnok a finanszírozásért és tőkepiaci kapcsolatokért felel, a számvevő a könyvelésért és adózásért', 'A kincstárnok könyvel, a számvevő hitelt vesz fel', 'Nincs különbség', 'A számvevő a vezérigazgató felettese'], correct: 0 },
+            { subject: 'penzugy', q: 'Mit jelent a részvénytársaság korlátozott felelőssége?', a: ['A részvényesek maximális vesztesége a részvényeik értékére korlátozódik', 'A cég nem vehet fel hitelt', 'A vezetők nem perelhetők', 'A vállalat nem fizet adót'], correct: 0 },
+            { subject: 'penzugy', q: 'Mi a Fisher-féle szétválasztási tétel lényege a vállalatvezetésben?', a: ['A menedzser feladata az NPV maximalizálása, a fogyasztás időzítését a részvényesek a tőkepiacon oldják meg', 'Az adózás és osztalék szétválasztása', 'A kötvény és részvény arányának rögzítése', 'A termelés korlátozása'], correct: 0 },
+            { subject: 'penzugy', q: 'Mikor optimális lecserélni egy meglévő régi gépet egy új gépre?', a: ['Amikor a régi gép következő évi üzemeltetési költsége meghaladja az új gép EAC-jét', 'Amikor a régi gép könyv szerinti értéke nulla lesz', 'Amikor a régi gép elromlik', 'Minden 3. évben'], correct: 0 },
+            { subject: 'penzugy', q: 'Milyen pénzáramlást kell használni a vállalatértékelés során?', a: ['Szabad pénzáramlást (FCF)', 'Számviteli nettó nyereséget', 'Csak az osztalékokat', 'Kizárólag az EBITDA-t'], correct: 0 },
+            { subject: 'penzugy', q: 'Mit jelent az eladósodottsági mutató?', a: ['Hosszú lejáratú hitelek / (Hosszú lejáratú hitelek + Saját tőke)', 'Forgóeszközök / Kötelezettségek', 'Kamatfizetés / EBIT', 'Piaci érték / Saját tőke'], correct: 0 },
+            { subject: 'penzugy', q: 'Hogyan számítható az átlagos beszedési idő (DSO)?', a: ['Átlagos vevőállomány / (Árbevétel / 365)', 'Árbevétel / Készletek', 'Készpénz / Szállítók', 'Forgóeszközök / 365'], correct: 0 },
+            { subject: 'penzugy', q: 'Mi a kamatfedezeti mutató képlete?', a: ['(EBIT + Amortizáció) / Kamatfizetés', 'Kamatfizetés / EBIT', 'Nettó profit / Kamat', 'Árbevétel / Kamat'], correct: 0 },
+            { subject: 'penzugy', q: 'Hogyan határozzuk meg a külső forrásigényt (EFN) a pénzügyi tervezésben?', a: ['Összes forrásfelhasználás (ΔNWC + ΔBE + Osztalék) - Működési cash flow', 'Árbevétel - Költségek', 'Eszközök + Saját tőke', 'Költségvetési deficit'], correct: 0 },
+            { subject: 'penzugy', q: 'Mit jelent a P/E ráta (árfolyam/nyereség hányados)?', a: ['Részvényárfolyam / Egy részvényre jutó nyereség (EPS)', 'EPS / Részvényárfolyam', 'Osztalék / Árfolyam', 'Piaci érték / Eszközök'], correct: 0 },
+
+            // ==================== STATISZTIKA 1 ====================
+            { subject: 'stat', q: 'Mi a statisztikai sokaság?', a: ['A vizsgálat tárgyát képező egységek összessége, halmaza', 'Egyetlen megfigyelt adat', 'A mintavételi hiba mértéke', 'A számítási képletek gyűjteménye'], correct: 0 },
+            { subject: 'stat', q: 'Melyik skála rendelkezik abszolút nulla ponttal és értelmezhető arányokkal?', a: ['Arányskála', 'Nominális skála', 'Ordinális skála', 'Különbségi skála'], correct: 0 },
+            { subject: 'stat', q: 'Mi a medián definíciója?', a: ['A nagyság szerint rendezett értékek felezőértéke (50%-os kvantilis)', 'A leggyakoribb érték', 'A számtani átlag fele', 'A legnagyobb és legkisebb elem átlaga'], correct: 0 },
+            { subject: 'stat', q: 'Melyik középértéknél minimális a négyzetes eltérések összege?', a: ['Számtani átlag', 'Medián', 'Módusz', 'Geometriai átlag'], correct: 0 },
+            { subject: 'stat', q: 'Melyik középértéknél minimális az abszolút eltérések összege?', a: ['Medián', 'Számtani átlag', 'Módusz', 'Harmonikus átlag'], correct: 0 },
+            { subject: 'stat', q: 'Mi a relatív szórás (V) képlete?', a: ['V = σ / Ȳ (szórás osztva az átlaggal)', 'V = σ^2 / Ȳ', 'V = Ȳ / σ', 'V = Q3 - Q1'], correct: 0 },
+            { subject: 'stat', q: 'Mit ábrázol a Lorenz-görbe?', a: ['A kumulált sokasági arány és a kumulált értékösszeg-arány kapcsolatát (koncentrációt)', 'A sűrűségfüggvényt', 'A korrelációt pontdiagramon', 'A regressziós egyenest'], correct: 0 },
+            { subject: 'stat', q: 'Mit mér a Herfindahl-index (HI)?', a: ['A piaci koncentrációt (a részesedések négyzetösszege)', 'A mintavételi hibát', 'A ferdeséget', 'A hipoézisek szignifikanciáját'], correct: 0 },
+            { subject: 'stat', q: 'Mit jelent, ha a ferdeségi mutató (α3) pozitív?', a: ['Az eloszlás jobbra elnyúló (jobb oldali hosszú farok)', 'Az eloszlás szimmetrikus', 'Az eloszlás balra elnyúló', 'Az eloszlás lapult'], correct: 0 },
+            { subject: 'stat', q: 'Mit fejez ki a teljes variancia felbontása (SST = SSB + SSK)?', a: ['A teljes négyzetösszeg a belső és külső négyzetösszeg összege', 'A regresszió hibáját', 'A mintavételi szórást', 'A korreláció előjelét'], correct: 0 },
+            { subject: 'stat', q: 'Milyen kapcsolatot mér a Cramér-féle asszociációs együttható (C)?', a: ['Két minőségi ismérv kapcsolatának szorosságát (0 és 1 között)', 'Két mennyiségi ismérv lineáris kapcsolatát', 'Rangsorok egyezését', 'A szórás homogenitását'], correct: 0 },
+            { subject: 'stat', q: 'Milyen mutatóval jellemezhető két mennyiségi ismérv lineáris kapcsolata?', a: ['Lineáris korrelációs együttható (r)', 'Cramér-féle C', 'Varianciahányados (H^2)', 'Herfindahl-index'], correct: 0 },
+            { subject: 'stat', q: 'Mit fejez ki a determinációs együttható (r^2)?', a: ['Megmutatja, hogy az X változó hány százalékban magyarázza Y szóródását', 'A kovariancia négyzetét', 'A mintavételi hiba nagyságát', 'A p-értéket'], correct: 0 },
+            { subject: 'stat', q: 'Mit mutat meg a Spearman-féle rangkorreláció (ρ)?', a: ['Ordinális (sorrendi) skálán mért ismérvek közötti kapcsolat szorosságát', 'A csoportátlagok különbségét', 'A nominális ismérvek függetlenségét', 'A normális eloszlás illeszkedését'], correct: 0 },
+            { subject: 'stat', q: 'Hogyan bomlik fel a volumen- és árindex szorzata?', a: ['I_v = I_q · I_p (Értékindex = Volumenindex × Árindex)', 'I_v = I_q + I_p', 'I_v = I_q / I_p', 'I_v = gyök(I_q · I_p)'], correct: 0 },
+            { subject: 'stat', q: 'Milyen súlyozást alkalmaz a Laspeyres-féle árindex?', a: ['Bázisidőszaki mennyiségeket (q0)', 'Tárgyidőszaki mennyiségeket (q1)', 'Folyó árakat', 'Mértani átlagot'], correct: 0 },
+            { subject: 'stat', q: 'Milyen súlyozást alkalmaz a Paasche-féle árindex?', a: ['Tárgyidőszaki mennyiségeket (q1)', 'Bázisidőszaki mennyiségeket (q0)', 'Állandó árakat', 'Nem alkalmaz súlyozást'], correct: 0 },
+            { subject: 'stat', q: 'Hogyan számoljuk a Fisher-féle árindexet?', a: ['A Laspeyres- és Paasche-index mértani átlagaként: gyök(I^0 · I^1)', 'A két index számtani közepeként', 'A két index különbségeként', 'A két index hányadosaként'], correct: 0 },
+            { subject: 'stat', q: 'Mit mutat meg a cserearányindex (terms of trade)?', a: ['Az exportárindex és importárindex hányadosát (I_p^x / I_p^m)', 'A belföldi és külföldi infláció arányát', 'A forint árfolyamát', 'A GDP növekedési ütemét'], correct: 0 },
+            { subject: 'stat', q: 'Mit jelent a vásárlóerő-paritás (PPP)?', a: ['Nemzetközi árindex, ami megadja, hogy egy valutaegység mennyi külföldi valutával egyenértékű a vizsgált javakra', 'A hivatalos banki devizaárfolyam', 'A külkereskedelmi deficit', 'A hitelkamatok szintje'], correct: 0 },
+            { subject: 'stat', q: 'Mi a különbség a FAE és az EV mintavétel között?', a: ['A FAE visszatevéses (független elemek), az EV visszatevés nélküli mintavétel', 'A FAE mindig kisebb mintát jelent', 'Az EV nem véletlen minta', 'Nincs különbség'], correct: 0 },
+            { subject: 'stat', q: 'Mikor torzítatlan egy becslőfüggvény?', a: ['Ha várható értéke megegyezik a becsülni kívánt sokasági paraméterrel (E(θ̂) = θ)', 'Ha szórása nulla', 'Ha nem függ a mintától', 'Ha értéke mindig pozitív'], correct: 0 },
+            { subject: 'stat', q: 'Mi a korrigált tapasztalati szórásnégyzet (s^2) osztója n elemű mintánál?', a: ['n - 1 (a torzítatlanság biztosítására)', 'n', 'n + 1', 'gyök(n)'], correct: 0 },
+            { subject: 'stat', q: 'Mit mond ki a Centrális Határeloszlástétel (CLT)?', a: ['Független, azonos eloszlású változók átlaga nagy minta esetén aszimptotikusan normális eloszlást követ', 'Minden minta eloszlása egyenletes', 'A szórás a minta növekedésével nő', 'A medián egyenlő az átlaggal'], correct: 0 },
+            { subject: 'stat', q: 'Milyen eloszlást használunk a várható érték konfidencia-intervallumához, ha a szórás ISMERETLEN és a minta kicsi?', a: ['Student-féle t-eloszlást (n-1 szabadságfokkal)', 'Standard normális eloszlást (z-skála)', 'F-eloszlást', 'Khi-négyzet eloszlást'], correct: 0 },
+            { subject: 'stat', q: 'Hogyan számítható a várható érték konfidencia-intervalluma ismert sokasági szórás (σ) mellett?', a: ['ȳ ± z_(1-α/2) · (σ / gyök(n))', 'ȳ ± t · (s / n)', 'ȳ ± σ^2', 'ȳ ± z · gyök(n)'], correct: 0 },
+            { subject: 'stat', q: 'Mi az elsőfajú hiba a hipotézisvizsgálatban?', a: ['Elvetjük a nullhipotézist (H0), pedig igaz (valószínűsége α)', 'Elfogadjuk a hamis H0-t', 'Helyes döntést hozunk', 'Nem tudunk dönteni'], correct: 0 },
+            { subject: 'stat', q: 'Mi a másodfajú hiba a hipotézisvizsgálatban?', a: ['Elfogadjuk a nullhipotézist (H0), pedig hamis (valószínűsége β)', 'Elvetjük az igaz H0-t', 'A p-érték számítási hibája', 'A minta torzítása'], correct: 0 },
+            { subject: 'stat', q: 'Mi a döntési szabály a p-érték alapján adott α szignifikanciaszint mellett?', a: ['Ha p ≤ α, a nullhipotézist (H0) elvetjük', 'Ha p > α, H0-t elvetjük', 'Ha p = 0.5, elfogadjuk', 'A p-érték nem használható döntésre'], correct: 0 },
+            { subject: 'stat', q: 'Milyen eloszlást követ független standard normális változók négyzetösszege?', a: ['Khi-négyzet (χ^2) eloszlást', 'Student t-eloszlást', 'Exponenciális eloszlást', 'F-eloszlást'], correct: 0 }
+        ];
+
+        let currentQuiz = [];
+        let currentIndex = 0;
+        let score = 0;
+
+        function openQuizModal() {
+            document.getElementById('quiz-modal').classList.remove('hidden');
+            resetQuizSetup();
+        }
+
+        function closeQuizModal() {
+            document.getElementById('quiz-modal').classList.add('hidden');
+        }
+
+        function resetQuizSetup() {
+            document.getElementById('quiz-setup').classList.remove('hidden');
+            document.getElementById('quiz-runner').classList.add('hidden');
+            document.getElementById('quiz-result').classList.add('hidden');
+            document.getElementById('quiz-subject-select').value = 'all';
+            document.getElementById('quiz-count-select').value = '10';
+        }
+
+        function startSubjectQuiz(subKey) {
+            openQuizModal();
+            document.getElementById('quiz-subject-select').value = subKey;
+            generateAndStartQuiz();
+        }
+
+        function generateAndStartQuiz() {
+            const selectedSub = document.getElementById('quiz-subject-select').value;
+            const requestedCount = parseInt(document.getElementById('quiz-count-select').value, 10);
+
+            let filtered = questionPool.filter(item => {
+                return (selectedSub === 'all' || item.subject === selectedSub);
+            });
+
+            if(filtered.length === 0) {
+                alert('Nincs elérhető kérdés ehhez a tantárgyhoz!');
+                return;
+            }
+
+            // Véletlenszerű keverés és kívánt kérdésszám kivágása
+            filtered.sort(() => Math.random() - 0.5);
+            const actualCount = Math.min(requestedCount, filtered.length);
+            currentQuiz = filtered.slice(0, actualCount);
+            currentIndex = 0;
+            score = 0;
+
+            document.getElementById('quiz-setup').classList.add('hidden');
+            document.getElementById('quiz-runner').classList.remove('hidden');
+            document.getElementById('quiz-runner').classList.add('flex');
+            
+            showCurrentQuestion();
+        }
+
+        function showCurrentQuestion() {
+            const qData = currentQuiz[currentIndex];
+            document.getElementById('quiz-progress').innerText = `${currentIndex + 1} / ${currentQuiz.length}. kérdés`;
+            
+            const subLabels = { matek: 'Gazdmat 2', makro: 'Makroökonómia', penzugy: 'Pénzügytan', stat: 'Statisztika' };
+            document.getElementById('quiz-subject-badge').innerText = subLabels[qData.subject] || 'Vegyes';
+
+            document.getElementById('quiz-question-text').innerText = qData.q;
+            document.getElementById('quiz-feedback').classList.add('hidden');
+            document.getElementById('quiz-next-btn').classList.add('hidden');
+
+            const optionsContainer = document.getElementById('quiz-options');
+            optionsContainer.innerHTML = '';
+
+            let opts = qData.a.map((text, idx) => ({ text, isCorrect: idx === qData.correct }));
+            opts.sort(() => Math.random() - 0.5);
+
+            opts.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'w-full text-left p-3.5 rounded-xl bg-slate-800 hover:bg-slate-700/80 border border-slate-700 text-slate-200 text-sm font-medium transition-all';
+                btn.innerText = opt.text;
+                btn.onclick = () => selectAnswer(btn, opt.isCorrect);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function selectAnswer(button, isCorrect) {
+            const allBtns = document.querySelectorAll('#quiz-options button');
+            allBtns.forEach(b => b.disabled = true);
+
+            const feedback = document.getElementById('quiz-feedback');
+            feedback.classList.remove('hidden');
+
+            if(isCorrect) {
+                button.classList.remove('bg-slate-800', 'border-slate-700');
+                button.classList.add('bg-emerald-500/20', 'border-emerald-500', 'text-emerald-300');
+                feedback.className = 'p-3 rounded-xl text-xs sm:text-sm font-semibold bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 mb-4';
+                feedback.innerHTML = '<i class="fa-solid fa-circle-check mr-1.5"></i> Helyes válasz!';
+                score++;
+            } else {
+                button.classList.remove('bg-slate-800', 'border-slate-700');
+                button.classList.add('bg-red-500/20', 'border-red-500', 'text-red-300');
+                feedback.className = 'p-3 rounded-xl text-xs sm:text-sm font-semibold bg-red-500/10 border border-red-500/30 text-red-400 mb-4';
+                feedback.innerHTML = '<i class="fa-solid fa-circle-xmark mr-1.5"></i> Helytelen válasz!';
+            }
+
+            document.getElementById('quiz-next-btn').classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            currentIndex++;
+            if(currentIndex < currentQuiz.length) {
+                showCurrentQuestion();
+            } else {
+                document.getElementById('quiz-runner').classList.add('hidden');
+                document.getElementById('quiz-runner').classList.remove('flex');
+                document.getElementById('quiz-result').classList.remove('hidden');
+
+                const pct = Math.round((score / currentQuiz.length) * 100);
+                document.getElementById('quiz-score-text').innerText = `Elért pontszám: ${score} / ${currentQuiz.length} (${pct}%)`;
+            }
+        }
+    </script>
+</body>
+</html>

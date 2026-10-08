@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="hu" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vállalati Pénzügyek | Teljes Tudástár</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    
+    <script>
+      MathJax = {
+        tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+        svg: { fontCache: 'global' }
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { 
+                        sans: ['Outfit', 'sans-serif'], 
+                        mono: ['Space Grotesk', 'monospace'] 
+                    },
+                    colors: { 
+                        primary: '#34d399', 
+                        darkbg: '#0f172a' 
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #0f172a;
+            color: #e2e8f0;
+            -webkit-font-smoothing: antialiased;
+            font-size: 1.05rem;
+        }
+        .clean-section {
+            background: rgba(30, 41, 59, 0.55);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .topic-card {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.2s ease;
+        }
+        .topic-card:hover {
+            border-color: rgba(52, 211, 153, 0.4);
+            transform: translateY(-2px);
+        }
+        .formula-box {
+            background: rgba(0, 0, 0, 0.5);
+            border-left: 4px solid #34d399;
+            padding: 1rem 1.25rem;
+            margin: 0.75rem 0;
+            border-radius: 0 0.75rem 0.75rem 0;
+            font-family: 'Space Grotesk', monospace;
+            font-size: 1.15rem;
+        }
+        .custom-nav-scroll {
+            scrollbar-width: thin;
+            scrollbar-color: #475569 rgba(15, 23, 42, 0.4);
+        }
+        .custom-nav-scroll::-webkit-scrollbar {
+            height: 7px;
+        }
+        .custom-nav-scroll::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 10px;
+        }
+        .custom-nav-scroll::-webkit-scrollbar-thumb {
+            background-color: #475569;
+            border-radius: 10px;
+        }
+        .custom-nav-scroll::-webkit-scrollbar-thumb:hover {
+            background-color: #34d399;
+        }
+    </style>
+</head>
+<body class="selection:bg-emerald-400 selection:text-slate-900 min-h-screen flex flex-col justify-between">
+
+    <header class="sticky top-0 w-full z-40 bg-slate-900/95 border-b border-slate-800 backdrop-blur-md">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 h-18 py-3 flex items-center justify-between gap-4">
+            <a href="index.html" class="flex items-center gap-3 text-slate-300 hover:text-white transition-colors group">
+                <div class="w-10 h-10 rounded-xl bg-slate-800 group-hover:bg-primary group-hover:text-slate-900 flex items-center justify-center transition-all">
+                    <i class="fa-solid fa-arrow-left text-sm"></i>
+                </div>
+                <span class="text-sm uppercase font-mono tracking-wider font-bold hidden sm:inline">Portál</span>
+            </a>
+
+            <div class="relative flex-1 max-w-lg">
+                <i class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                <input type="text" id="searchInput" placeholder="Keresés mutatók, képletek, szabályok között..." 
+                       class="bg-slate-800/90 border border-slate-700 rounded-xl py-2.5 pl-11 pr-4 text-sm sm:text-base focus:outline-none focus:border-primary w-full text-white placeholder-slate-400 transition-all">
+            </div>
+
+            <span class="text-sm font-mono text-primary font-bold hidden md:block">Vállalati Pénzügyek</span>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 py-10 flex-1 w-full">
+        <div class="mb-10">
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Vállalati Pénzügyek Összefoglaló</h1>
+            <p class="text-slate-300 text-base sm:text-lg mt-2">Brealey–Myers tananyag: Értékelési modellek, beruházási döntések, DuPont-elemzés és pénzügyi tervezés.</p>
+        </div>
+
+        <div class="flex items-center gap-3 overflow-x-auto pb-4 mb-10 text-sm font-mono custom-nav-scroll">
+            <a href="#fin1" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 whitespace-nowrap transition-all shadow-sm font-semibold">1. Pénzügyi Vezetés</a>
+            <a href="#fin2" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 whitespace-nowrap transition-all shadow-sm font-semibold">2. Jelenérték & Tőkeköltség</a>
+            <a href="#fin3" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 whitespace-nowrap transition-all shadow-sm font-semibold">3. Annuitás & Kötvények</a>
+            <a href="#fin4" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 whitespace-nowrap transition-all shadow-sm font-semibold">4. Részvényértékelés</a>
+            <a href="#fin5" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 whitespace-nowrap transition-all shadow-sm font-semibold">5. Beruházási Kritériumok</a>
+            <a href="#fin6" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 whitespace-nowrap transition-all shadow-sm font-semibold">6. Gyakorlati NPV & EAC</a>
+            <a href="#fin7" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 whitespace-nowrap transition-all shadow-sm font-semibold">7. Mutatószámok & DuPont</a>
+        </div>
+
+        <div id="content-area" class="space-y-12">
+            <!-- 1. FEJEZET -->
+            <section id="fin1" class="clean-section rounded-2xl p-6 sm:p-9">
+                <div class="border-b border-slate-700/80 pb-4 mb-6">
+                    <span class="text-sm font-mono text-primary uppercase tracking-wider font-bold">MVP 1. Fejezet</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">A Pénzügyek és a Pénzügyi Vezető Szerepe</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-emerald-400 bg-emerald-400/10 border-emerald-400/20">Vállalati Forma</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Részvénytársaság (RT)</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-2">Jogi személy, amely elkülönül a tulajdonosaitól. Legfontosabb előnye a <strong>korlátozott felelősség</strong>: a részvényesek maximális vesztesége a befektetett tőkéjükre korlátozódik.</p>
+                        <p class="text-slate-300 text-xs sm:text-sm">Hátránya a kétszeres adóztatás (társasági adó a nyereségre + osztalékadó a tulajdonosok szintjén).</p>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-sky-400 bg-sky-400/10 border-sky-400/20">Szervezet</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Pénzügyi Vezető, Kincstárnok és Számvevő</h3>
+                        </div>
+                        <ul class="text-slate-200 text-sm sm:text-base space-y-1">
+                            <li>• <strong>Pénzügyi Igazgató (CFO):</strong> A teljes pénzügyi stratégia irányítója.</li>
+                            <li>• <strong>Kincstárnok (Treasurer):</strong> Pénzgazdálkodásért, hitelek felvételéért, tőkepiaci kapcsolatokért felel (kifelé fókuszál).</li>
+                            <li>• <strong>Számvevő (Controller):</strong> Könyvelésért, költségvetési tervezésért, belső ellenőrzésért és adózásért felel (befelé fókuszál).</li>
+                        </ul>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl md:col-span-2">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-purple-400 bg-purple-400/10 border-purple-400/20">Pénzáramlás</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">A Pénzáramlások Köre & Ügynökprobléma</h3>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm sm:text-base text-slate-200">
+                            <div>
+                                <p><strong>A pénzáramlás 4 lépése:</strong></p>
+                                <ol class="text-slate-300 text-xs sm:text-sm space-y-1 mt-1">
+                                    <li>1. Értékpapírok kibocsátása a pénzügyi piacokon (tőkebevonás).</li>
+                                    <li>2. A tőke reáleszközökbe (üzemek, gépek) való fektetése.</li>
+                                    <li>3. A reáleszközök működtetése pénzáramlást generál.</li>
+                                    <li>4. Újrabefektetés, a maradék visszafizetése a befektetőknek.</li>
+                                </ol>
+                            </div>
+                            <div>
+                                <p><strong>Tulajdonlás és irányítás szétválása:</strong></p>
+                                <p class="text-slate-300 text-xs sm:text-sm mt-1">A menedzserek céljai eltérhetnek a tulajdonosokétól. Korlátok: igazgatótanácsi felügyelet, menedzserpiaci verseny, és részvényopciós ösztönző rendszerek.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. FEJEZET -->
+            <section id="fin2" class="clean-section rounded-2xl p-6 sm:p-9">
+                <div class="border-b border-slate-700/80 pb-4 mb-6">
+                    <span class="text-sm font-mono text-primary uppercase tracking-wider font-bold">MVP 2. Fejezet</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">A Jelenérték és a Tőke Alternatívaköltsége</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-sky-400 bg-sky-400/10 border-sky-400/20">Alapképlet</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Jelenérték (PV) és Diszkonttényező (DF)</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-2">A jövőbeli pénzáramlás mai értéke. A diszkonttényező egy jövőbeli 1 dollár mai jelenértékét adja meg:</p>
+                        <div class="formula-box">\(DF_t = \frac{1}{(1+r)^t} \implies PV = C_t \cdot DF_t = \frac{C_t}{(1+r)^t}\)</div>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-emerald-400 bg-emerald-400/10 border-emerald-400/20">Alapszabály</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Nettó Jelenérték (NPV) Szabály</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-2">A pénzbeáramlások jelenértékének és a kezdeti beruházási ráfordításnak a különbsége:</p>
+                        <div class="formula-box">\(NPV = -C_0 + PV = -C_0 + \sum_{t=1}^n \frac{C_t}{(1+r)^t}\)</div>
+                        <p class="text-slate-200 text-sm sm:text-base"><strong>Döntési szabály:</strong> Fogadjuk el a beruházást, ha \(NPV > 0\)! Ez növeli a részvényesek vagyonát.</p>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-amber-400 bg-amber-400/10 border-amber-400/20">Koncepció</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">A Tőke Alternatívaköltsége (\(r\))</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-2">Az az elvárt hozam, amelyről a befektetők lemondanak egy hasonló kockázatú tőkepiaci alternatíva elvetésével.</p>
+                        <div class="formula-box">Megtérülési ráta szabály: Fogadjuk el a projektet, ha Hozam \(> r\)!</div>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-purple-400 bg-purple-400/10 border-purple-400/20">Modell</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Fogyasztás vs. Beruházás (Fisher-szétválasztás)</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed">A tőkepiac létezése szétválasztja a termelési és a fogyasztási döntéseket: a menedzser feladata kizárólag a nettó jelenérték maximalizálása; a tulajdonosok a pénzügyi piacokon egyénileg hangolják össze mai és jövőbeli fogyasztásukat.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. FEJEZET -->
+            <section id="fin3" class="clean-section rounded-2xl p-6 sm:p-9">
+                <div class="border-b border-slate-700/80 pb-4 mb-6">
+                    <span class="text-sm font-mono text-primary uppercase tracking-wider font-bold">MVP 3. Fejezet</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">Örökjáradék, Annuitás és Kötvényértékelés</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-sky-400 bg-sky-400/10 border-sky-400/20">Képlet</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Örökjáradék és Annuitás Jelenértéke</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base mb-1"><strong>Örökjáradék:</strong> végtelen ideig tartó, azonos \(C\) pénzáramlás:</p>
+                        <div class="formula-box">\(PV = \frac{C}{r}\)</div>
+                        <p class="text-slate-200 text-sm sm:text-base mt-2 mb-1"><strong>Annuitás:</strong> \(t\) éven át tartó, fix \(C\) összegű pénzáramlás:</p>
+                        <div class="formula-box">\(PV = C \cdot \left[ \frac{1}{r} - \frac{1}{r(1+r)^t} \right]\)</div>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-purple-400 bg-purple-400/10 border-purple-400/20">Kamatozás</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Kamatos Kamat és Tényleges Éves Hozam</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-2">Évente \(m\)-szer történő tőkésítés esetén az 1 év múlva esedékes összeg:</p>
+                        <div class="formula-box">\(\text{Érték 1 év múlva} = \left(1 + \frac{r_{névleges}}{m}\right)^m\)</div>
+                        <p class="text-slate-300 text-xs sm:text-sm">Folytonos kamatozásnál a növekedési tényező: \(e^r\).</p>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-emerald-400 bg-emerald-400/10 border-emerald-400/20">Összefüggés</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Nominális és Reálkamatláb (Fisher-szabály)</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-2">Az inflációval korrigált hozam pontos összefüggése:</p>
+                        <div class="formula-box">\(1 + r_{reál} = \frac{1 + r_{nominális}}{1 + \text{infláció}}\)</div>
+                        <p class="text-slate-300 text-xs sm:text-sm">Szabály: Nominális pénzáramlást nominális kamatlábbal, reál pénzáramlást reálkamatlábbal diszkontálunk!</p>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-amber-400 bg-amber-400/10 border-amber-400/20">Árazás</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Kötvényértékelés és Árfolyam</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-1">A kötvény piaci értéke a szelvénykifizetések és a névérték jelenértékének összege:</p>
+                        <div class="formula-box">\(P_0 = \sum_{t=1}^n \frac{C}{(1+r)^t} + \frac{\text{Névérték}}{(1+r)^n}\)</div>
+                        <p class="text-slate-300 text-xs sm:text-sm">Ha a piaci elvárt hozam (\(r\)) emelkedik, a kötvény árfolyama csökken.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. FEJEZET -->
+            <section id="fin4" class="clean-section rounded-2xl p-6 sm:p-9">
+                <div class="border-b border-slate-700/80 pb-4 mb-6">
+                    <span class="text-sm font-mono text-primary uppercase tracking-wider font-bold">MVP 4. Fejezet</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">A Részvények Értékelése és a Növekedés</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-sky-400 bg-sky-400/10 border-sky-400/20">Alapmodell</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Elvárt hozam és Osztalékmodell</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base mb-1">Az elvárt hozam az osztalékhozam és a tőkenyereség összege:</p>
+                        <div class="formula-box">\(r = \frac{DIV_1}{P_0} + \frac{P_1 - P_0}{P_0}\)</div>
+                        <p class="text-slate-200 text-sm sm:text-base mt-2">Általános osztalékdiszkontálási modell (DDM):</p>
+                        <div class="formula-box">\(P_0 = \sum_{t=1}^\infty \frac{DIV_t}{(1+r)^t}\)</div>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-emerald-400 bg-emerald-400/10 border-emerald-400/20">Gordon-modell</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Állandó Növekedésű Osztalékmodell</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-1">Ha az osztalékok állandó \(g\) ütemben nőnek a végtelenségig (\(r > g\)):</p>
+                        <div class="formula-box">\(P_0 = \frac{DIV_1}{r - g} \implies r = \frac{DIV_1}{P_0} + g\)</div>
+                        <p class="text-slate-300 text-xs sm:text-sm">Fenntartható növekedési ütem: \(g = \text{Újrabefektetési ráta} \times ROE = (1 - \text{Osztalékfizetési ráta}) \times ROE\).</p>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-purple-400 bg-purple-400/10 border-purple-400/20">Értékfelbontás</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Növekedési Lehetőségek Jelenértéke (PVGO)</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-2">A részvényárfolyam felbontható a zéró-növekedési értékre és a növekedési lehetőségek értékére:</p>
+                        <div class="formula-box">\(P_0 = \frac{EPS_1}{r} + PVGO\)</div>
+                        <p class="text-slate-300 text-xs sm:text-sm">Ha a vállalat csak \(r\) hozamú projektekbe fektet vissza (\(ROE = r\)), akkor \(PVGO = 0\), a visszaforgatás nem növeli a részvényárat.</p>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-amber-400 bg-amber-400/10 border-amber-400/20">Vállalatértékelés</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Szabad Pénzáramlás (FCF) Módszer</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-1">A vállalat értéke a tervezési horizontig (\(H\)) számított szabad pénzáramlások és a végső érték (terminal value) jelenértéke:</p>
+                        <div class="formula-box">\(PV = \sum_{t=1}^H \frac{FCF_t}{(1+r)^t} + \frac{PV_H}{(1+r)^H}\)</div>
+                        <p class="text-slate-300 text-xs sm:text-sm">A horizonton túli érték a Gordon-modellel számolható: \(PV_H = \frac{FCF_{H+1}}{r - g}\).</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. FEJEZET -->
+            <section id="fin5" class="clean-section rounded-2xl p-6 sm:p-9">
+                <div class="border-b border-slate-700/80 pb-4 mb-6">
+                    <span class="text-sm font-mono text-primary uppercase tracking-wider font-bold">MVP 5. Fejezet</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">Beruházási Döntési Kritériumok és az IRR Csapdái</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-emerald-400 bg-emerald-400/10 border-emerald-400/20">Módszer</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Belső Megtérülési Ráta (IRR)</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-2">Az a diszkontráta, amely mellett a beruházás nettó jelenértéke pontosan nulla:</p>
+                        <div class="formula-box">\(NPV = -C_0 + \sum_{t=1}^n \frac{C_t}{(1+IRR)^t} = 0\)</div>
+                        <p class="text-slate-200 text-sm sm:text-base"><strong>Szabály:</strong> Ha \(IRR > r\) (tőkeköltség), a projekt elfogadható.</p>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-red-400 bg-red-400/10 border-red-400/20">Figyelmeztetés</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Az IRR 4 Veszélyes Csapdája</h3>
+                        </div>
+                        <ul class="text-slate-200 text-xs sm:text-sm space-y-1.5">
+                            <li>• <strong>1. Hitelnyújtás vagy hitelfelvétel:</strong> Pozitív kezdeti pénzáramlásnál a magasabb IRR rosszabb projektet jelez.</li>
+                            <li>• <strong>2. Több megoldás:</strong> Ha a pénzáramlás előjele többször vált, több belső megtérülési ráta is adódhat.</li>
+                            <li>• <strong>3. Kölcsönösen kizáró projektek:</strong> Az IRR nem veszi figyelembe a beruházás volumenét (egy kisebb projektnek lehet magasabb az IRR-je, de kisebb az abszolút vagyongyarapítása).</li>
+                            <li>• <strong>4. Eltérő kamatlábak:</strong> Nem kezeli a term-struktúrát (változó kamatlábakat az évek során).</li>
+                        </ul>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-amber-400 bg-amber-400/10 border-amber-400/20">Hagyományos</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Megtérülési Idő és Könyv Szerinti Megtérülés</h3>
+                        </div>
+                        <ul class="text-slate-200 text-xs sm:text-sm space-y-1.5">
+                            <li>• <strong>Megtérülési idő:</strong> Figyelmen kívül hagyja a pénz időértékét és a küszöb utáni pénzáramlásokat.</li>
+                            <li>• <strong>Könyv szerinti megtérülés:</strong> Számviteli eredmény / Átlagos eszközérték. Számviteli torzításokat hordoz és nem pénzáramláson alapul.</li>
+                        </ul>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-sky-400 bg-sky-400/10 border-sky-400/20">Tőkerangsorolás</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Jövedelmezőségi Index (PI)</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-1">Tőkekorlát mellett segít a legnagyobb összértéket adó projektek kiválasztásában:</p>
+                        <div class="formula-box">\(PI = \frac{NPV}{C_0} \quad \text{vagy} \quad \frac{PV}{C_0}\)</div>
+                        <p class="text-slate-300 text-xs sm:text-sm">A tőkekeretet a legmagasabb súlyozott átlagos PI-jű projektekkel töltjük fel.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. FEJEZET -->
+            <section id="fin6" class="clean-section rounded-2xl p-6 sm:p-9">
+                <div class="border-b border-slate-700/80 pb-4 mb-6">
+                    <span class="text-sm font-mono text-primary uppercase tracking-wider font-bold">MVP 6. Fejezet</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">Gyakorlati Beruházási Döntések és Pénzáramlások</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-emerald-400 bg-emerald-400/10 border-emerald-400/20">Szabályok</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Pénzáramlás-számítási Alapszabályok</h3>
+                        </div>
+                        <ul class="text-slate-200 text-sm sm:text-base space-y-1">
+                            <li>• <strong>Csak a pótlólagos pénzáramlás számít:</strong> Kizárólag a döntés következtében fellépő többlet pénzáramlásokat vesszük figyelembe.</li>
+                            <li>• <strong>Elsüllyedt költségek:</strong> A múltbeli kifizetéseket figyelmen kívül kell hagyni.</li>
+                            <li>• <strong>Alternatívaköltség:</strong> A felhasznált saját eszközök piaci eladási értékét kiadásként kell elszámolni.</li>
+                            <li>• <strong>Forgótőkeigény (\(\Delta NWC\)):</strong> Készletek és vevőkövetelések növekedése pénzkiadásként jelentkezik.</li>
+                        </ul>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-sky-400 bg-sky-400/10 border-sky-400/20">Képlet</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Éves Költség-egyenértékes (EAC)</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-1">Eltérő élettartamú gépek költségalapú összehasonlítására szolgál:</p>
+                        <div class="formula-box">\(EAC = \frac{\text{Költségek Jelenértéke (PV)}}{\text{Annuitásfaktor}(r, n)}\)</div>
+                        <p class="text-slate-300 text-xs sm:text-sm">A meglévő gépet akkor kell újra cserélni, amikor működtetési költsége meghaladja az új gép EAC-jét.</p>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl md:col-span-2">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-amber-400 bg-amber-400/10 border-amber-400/20">Pénzáramlás</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Működési Cash Flow & Értékcsökkenési Adópajzs</h3>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm sm:text-base text-slate-200">
+                            <div>
+                                <p class="font-bold text-primary">Működési pénzáramlás (OCF):</p>
+                                <div class="formula-box">\(OCF = (\text{Árbevétel} - \text{Költségek})(1 - T_c) + \text{Amortizáció} \cdot T_c\)</div>
+                                <p class="text-slate-300 text-xs sm:text-sm mt-1">Az \(\text{Amortizáció} \cdot T_c\) az értékcsökkenési adópajzs (készpénzmegtakarítás).</p>
+                            </div>
+                            <div>
+                                <p class="font-bold text-primary">Beruházás optimális időzítése:</p>
+                                <p class="text-slate-300 text-xs sm:text-sm mt-1">Pozitív NPV-jű projektnél is érdemes lehet várni, ha a projekt jövőbeli növekedési üteme meghaladja a tőkeköltséget. Jelenlegi NPV a halasztott érték diszkontáltja: \(\frac{NPV_t}{(1+r)^t}\).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 7. FEJEZET -->
+            <section id="fin7" class="clean-section rounded-2xl p-6 sm:p-9">
+                <div class="border-b border-slate-700/80 pb-4 mb-6">
+                    <span class="text-sm font-mono text-primary uppercase tracking-wider font-bold">MVP 29. Fejezet</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">Pénzügyi Elemzés, DuPont-modell és Tervezés</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-sky-400 bg-sky-400/10 border-sky-400/20">Likviditás & Tőkeáttétel</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Pénzügyi Helyzet Mutatói</h3>
+                        </div>
+                        <ul class="text-slate-200 text-xs sm:text-sm space-y-1.5">
+                            <li>• <strong>Likviditási ráta:</strong> \(\frac{\text{Forgóeszközök}}{\text{Rövid lejáratú kötelezettségek}}\)</li>
+                            <li>• <strong>Likviditási gyorsráta (Acid test):</strong> \(\frac{\text{Pénzeszközök} + \text{Értékpapírok} + \text{Vevők}}{\text{Rövid lejáratú kötelezettségek}}\)</li>
+                            <li>• <strong>Eladósodottsági mutató:</strong> \(\frac{\text{Hosszú lejáratú hitelek}}{\text{Hosszú lejáratú hitelek} + \text{Saját tőke}}\)</li>
+                            <li>• <strong>Kamatfedezet:</strong> \(\frac{EBIT + \text{Amortizáció}}{\text{Kamatfizetés}}\)</li>
+                        </ul>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-purple-400 bg-purple-400/10 border-purple-400/20">Működés & Piac</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Hatékonysági és Piaci Mutatók</h3>
+                        </div>
+                        <ul class="text-slate-200 text-xs sm:text-sm space-y-1.5">
+                            <li>• <strong>Eszközarányos árbevétel:</strong> \(\frac{\text{Árbevétel}}{\text{Átlagos eszközállomány}}\)</li>
+                            <li>• <strong>Átlagos beszedési idő (DSO):</strong> \(\frac{\text{Átlagos vevőállomány}}{\text{Árbevétel} / 365}\)</li>
+                            <li>• <strong>P/E ráta:</strong> \(\frac{\text{Részvényárfolyam}}{EPS}\)</li>
+                            <li>• <strong>Tobin-féle Q:</strong> \(\frac{\text{Eszközök piaci értéke}}{\text{Becsült újrapótlási költség}}\)</li>
+                        </ul>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl md:col-span-2">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-emerald-400 bg-emerald-400/10 border-emerald-400/20">Bontás</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">A DuPont-módszer (ROE és ROA felbontása)</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-2">Megmutatja, honnan származik a vállalat megtérülése:</p>
+                        <div class="formula-box text-xs sm:text-sm">\(ROA = \frac{\text{Árbevétel}}{\text{Eszközök}} \times \frac{EBIT - \text{Adó}}{\text{Árbevétel}} = \text{Eszközarányos árbevétel} \times \text{Nettó haszonkulcs}\)</div>
+                        <div class="formula-box text-xs sm:text-sm">\(ROE = \frac{\text{Eszközök}}{\text{Saját tőke}} \times \frac{\text{Árbevétel}}{\text{Eszközök}} \times \frac{EBIT - \text{Adó}}{\text{Árbevétel}} \times \frac{\text{Adózott eredmény}}{EBIT - \text{Adó}}\)</div>
+                        <p class="text-slate-300 text-xs sm:text-sm mt-1">Komponensek: <strong>Tőkeáttétel</strong> \(\times\) <strong>Eszközhatékonyság</strong> \(\times\) <strong>Haszonkulcs</strong> \(\times\) <strong>Kamatteher</strong>.</p>
+                    </div>
+
+                    <div class="topic-card p-5 rounded-xl md:col-span-2">
+                        <div class="flex items-center gap-2.5 mb-2.5">
+                            <span class="text-xs font-mono uppercase tracking-wider font-bold px-2.5 py-1 rounded border text-amber-400 bg-amber-400/10 border-amber-400/20">Tervezés</span>
+                            <h3 class="text-base sm:text-lg font-bold text-white">Pénzügyi Tervezés és Külső Forrásigény (EFN)</h3>
+                        </div>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed mb-2">Árbevétel-százalékos módszerrel megbecsüli a jövőbeli eszközszükségletet és finanszírozást:</p>
+                        <div class="formula-box text-xs sm:text-sm">\(\text{Külső forrásigény} = \text{Összes forrásfelhasználás} (\Delta NWC + \Delta BE + \text{Osztalék}) - \text{Működési pénzáramlás}\)</div>
+                        <p class="text-slate-300 text-xs sm:text-sm mt-1"><strong>Belső növekedési ráta:</strong> az a maximális ütem, amit a cég kizárólag a működéséből visszatartott profitból képes finanszírozni külső forrás bevonása nélkül.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="border-t border-slate-800/80 py-6 text-center text-sm text-slate-500">
+        Modern Vállalati Pénzügyek · Egyetemi Segédanyagok
+    </footer>
+
+    <script>
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase().trim();
+            const cards = document.querySelectorAll('.topic-card');
+            cards.forEach(card => {
+                const text = card.innerText.toLowerCase();
+                card.style.display = text.includes(query) ? 'block' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>
